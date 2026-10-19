@@ -1,0 +1,6 @@
+{
+  "name": "GlobeLink Education & Migration Consultants",
+  "description": "Premier corporate portal for GlobeLink Education and Migration Consultants (Globe Link Edu). Connecting Sri Lankan students and professionals to global education, Japanese language training (Let's Go Japan), international career pathways, and ethical migration consultancy.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
