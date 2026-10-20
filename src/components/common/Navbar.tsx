@@ -195,14 +195,14 @@ export const Navbar: React.FC<NavbarProps> = ({
               </div>
 
               <button
-                onClick={() => handleNavClick('career-partner')}
+                onClick={() => handleNavClick('career-preparation')}
                 className={`px-3 py-2 text-sm font-medium transition-colors ${
-                  currentPage === 'career-partner'
+                  currentPage === 'career-partner' || currentPage === 'career-preparation'
                     ? 'text-sky-400 border-b-2 border-sky-400'
                     : 'text-slate-200 hover:text-white'
                 }`}
               >
-                Career Partner Program
+                Career Preparation
               </button>
 
               <button
@@ -328,13 +328,13 @@ export const Navbar: React.FC<NavbarProps> = ({
               </button>
             </div>
             <button
-              onClick={() => handleNavClick('career-partner')}
+              onClick={() => handleNavClick('career-preparation')}
               className={`w-full text-left px-3 py-2.5 rounded-md text-sm font-medium flex items-center gap-2 ${
-                currentPage === 'career-partner' ? 'bg-sky-950/60 text-sky-400 font-semibold' : 'text-slate-200 hover:bg-slate-900'
+                currentPage === 'career-partner' || currentPage === 'career-preparation' ? 'bg-sky-950/60 text-sky-400 font-semibold' : 'text-slate-200 hover:bg-slate-900'
               }`}
             >
               <Briefcase className="w-4 h-4 text-sky-400" />
-              Your Career Partner Program
+              Career Preparation (Q&amp;A Library)
             </button>
             <button
               onClick={() => handleNavClick('education-consultancy')}

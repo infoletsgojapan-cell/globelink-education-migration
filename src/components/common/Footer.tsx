@@ -149,7 +149,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenSupabaseModal 
                   onClick={() => onNavigate('career-partner')}
                   className="hover:text-white transition-colors"
                 >
-                  Your Career Partner Program
+                  Career Preparation (Q&amp;A Library)
                 </button>
               </li>
               <li>

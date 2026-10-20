@@ -13,7 +13,8 @@ import {
   Clock,
   Compass,
   Building2,
-  Calendar
+  Calendar,
+  MessageCircle
 } from 'lucide-react';
 import { PageId } from '../types';
 import { COMPANY_INFO } from '../data/company';
@@ -436,14 +437,23 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenSupabaseMo
             </div>
           </div>
 
-          <div className="mt-10 text-center">
+          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
               onClick={() => onNavigate('career-partner')}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs transition-colors"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs transition-colors"
             >
-              <span>Explore Career Partner Program Details</span>
+              <span>Explore Career Preparation &amp; Interview Library</span>
               <ArrowRight className="w-4 h-4 text-sky-400" />
             </button>
+            <a
+              href={`${COMPANY_INFO.whatsappUrl}?text=${encodeURIComponent('Hello GlobeLink, I would like to ask about the GlobeLink Career Partner Program and career guidance.')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition-colors"
+            >
+              <MessageCircle className="w-4 h-4 fill-white text-emerald-600" />
+              <span>Ask About Career Guidance</span>
+            </a>
           </div>
         </div>
       </section>

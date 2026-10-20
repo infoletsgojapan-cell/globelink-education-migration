@@ -27,6 +27,7 @@ const PAGE_PATHS: Record<PageId, string> = {
   'lets-go-japan': '/lets-go-japan',
   'japanese-language-courses': '/japanese-language-courses',
   'career-partner': '/career-partner',
+  'career-preparation': '/career-preparation',
   'international-careers': '/international-careers',
   'migration-visa-support': '/migration-visa-support',
   'contact': '/contact',
@@ -41,6 +42,7 @@ const PATH_TO_PAGE: Record<string, PageId> = {
   '/lets-go-japan': 'lets-go-japan',
   '/japanese-language-courses': 'japanese-language-courses',
   '/career-partner': 'career-partner',
+  '/career-preparation': 'career-preparation',
   '/international-careers': 'international-careers',
   '/migration-visa-support': 'migration-visa-support',
   '/contact': 'contact',
@@ -105,6 +107,7 @@ export default function App() {
       case 'japanese-language-courses':
         return <JapaneseCoursesPage onNavigate={handleNavigate} onOpenSupabaseModal={() => setSupabaseModalOpen(true)} />;
       case 'career-partner':
+      case 'career-preparation':
         return <CareerPartnerPage onNavigate={handleNavigate} onOpenSupabaseModal={() => setSupabaseModalOpen(true)} />;
       case 'international-careers':
         return <InternationalCareersPage onNavigate={handleNavigate} onOpenSupabaseModal={() => setSupabaseModalOpen(true)} />;

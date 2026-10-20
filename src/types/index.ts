@@ -5,6 +5,7 @@ export type PageId =
   | 'lets-go-japan'
   | 'japanese-language-courses'
   | 'career-partner'
+  | 'career-preparation'
   | 'international-careers'
   | 'migration-visa-support'
   | 'contact'
@@ -60,4 +61,24 @@ export interface FAQItem {
   category: 'General' | 'Let\'s Go Japan' | 'Career Partner' | 'Education' | 'Visa & Compliance';
   question: string;
   answer: string;
+}
+
+export type InterviewCategory =
+  | 'General Interview Questions'
+  | 'HR Interview Questions'
+  | 'English Interview Practice'
+  | 'Japanese Interview Practice'
+  | 'Workplace Communication'
+  | 'Career Preparation FAQs';
+
+export interface InterviewQuestion {
+  id: string;
+  category: InterviewCategory;
+  questionEn: string;
+  questionJa?: string;
+  questionSi?: string;
+  sampleAnswerEn: string;
+  sampleAnswerJa?: string;
+  explanationSi: string;
+  personalizationTip: string;
 }

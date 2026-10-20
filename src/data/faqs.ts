@@ -38,6 +38,12 @@ export const FAQS: FAQItem[] = [
     answer: 'Our Career Partner Program provides career profile assessment, international CV tailoring (Gulf/Japanese formats), employer interview simulation, skills gap analysis, pre-departure orientation, and guidance through visa documentation requirements for countries like Japan, Dubai, the UAE, and the Maldives.'
   },
   {
+    id: 'faq-6b',
+    category: 'Career Partner',
+    question: 'Are the Career Preparation materials educational resources, and does GlobeLink sell job placements?',
+    answer: 'All interview question libraries, practice tools, and preparation guides are strictly educational resources designed to build communication confidence and international workplace readiness. GlobeLink Education and Migration Consultants does not sell job placements, does not act as an employment agency, and never guarantees hiring outcomes. All employment decisions are made independently by foreign employers based strictly on authentic qualifications and merit.'
+  },
+  {
     id: 'faq-7',
     category: 'Education',
     question: 'How do you help students applying for Japanese Language Schools and Universities?',
