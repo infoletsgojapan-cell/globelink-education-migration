@@ -14,6 +14,7 @@ import {
 import { AnnouncementItem, AnnouncementCategory, AnnouncementStatus } from '../../types';
 import { INITIAL_ANNOUNCEMENTS } from '../../data/announcements';
 import { getSupabaseConfig, isSupabaseConfigured } from '../../services/inquiryService';
+import { fetchNewsArticles } from '../../services/supabaseClient';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { TRANSLATIONS } from '../../data/translations';
 
@@ -37,47 +38,94 @@ export const AnnouncementsSection: React.FC = () => {
   const [announcements, setAnnouncements] = useState<AnnouncementItem[]>(INITIAL_ANNOUNCEMENTS);
   const [loading, setLoading] = useState(false);
 
-  // Attempt to fetch from Supabase if table exists
+  // Attempt to fetch from Supabase if table exists & load dynamic CMS news
   useEffect(() => {
     let isMounted = true;
-    const fetchSupabaseAnnouncements = async () => {
-      if (!isSupabaseConfigured()) return;
+    const fetchDynamicData = async () => {
       try {
         setLoading(true);
-        const { url, key } = getSupabaseConfig();
-        const cleanedUrl = url.replace(/\/$/, '');
-        const res = await fetch(`${cleanedUrl}/rest/v1/announcements?is_published=eq.true&order=event_date.asc`, {
-          headers: {
-            'apikey': key,
-            'Authorization': `Bearer ${key}`
+
+        // Fetch published CMS news
+        const newsRes = await fetchNewsArticles(true);
+        const cmsNewsAnnouncements: AnnouncementItem[] = (newsRes.data || []).map((art) => ({
+          id: art.id,
+          title: art.title,
+          category: 'Free Seminars' as AnnouncementCategory,
+          description: art.summary || art.content.slice(0, 180) + '...',
+          eventDate: art.publication_date,
+          format: 'Online',
+          status: 'Upcoming',
+          isPublished: true,
+          createdAt: art.created_at || new Date().toISOString()
+        }));
+
+        let cloudAnnouncements: AnnouncementItem[] = [];
+        if (isSupabaseConfigured()) {
+          const { url, key } = getSupabaseConfig();
+          const cleanedUrl = url.replace(/\/$/, '');
+          const res = await fetch(`${cleanedUrl}/rest/v1/announcements?is_published=eq.true&order=event_date.asc`, {
+            headers: {
+              'apikey': key,
+              'Authorization': `Bearer ${key}`
+            }
+          });
+          if (res.ok) {
+            const data = await res.json();
+            if (Array.isArray(data) && data.length > 0) {
+              cloudAnnouncements = data.map((item: any) => ({
+                id: item.id || `ann-${Date.now()}`,
+                title: item.title,
+                titleSi: item.title_si,
+                titleTa: item.title_ta,
+                titleJa: item.title_ja,
+                category: item.category,
+                description: item.description,
+                descriptionSi: item.description_si,
+                descriptionTa: item.description_ta,
+                descriptionJa: item.description_ja,
+                eventDate: item.event_date,
+                registrationOpens: item.registration_opens,
+                deadline: item.deadline,
+                format: item.format || 'Online',
+                officialUrl: item.official_url,
+                status: item.status || 'Upcoming',
+                isPublished: item.is_published ?? true,
+                createdAt: item.created_at || new Date().toISOString()
+              }));
+            }
           }
-        });
-        if (res.ok) {
-          const data = await res.json();
-          if (Array.isArray(data) && data.length > 0 && isMounted) {
-            // Map db schema to AnnouncementItem
-            const mapped: AnnouncementItem[] = data.map((item: any) => ({
-              id: item.id || `ann-${Date.now()}`,
-              title: item.title,
-              titleSi: item.title_si,
-              titleTa: item.title_ta,
-              titleJa: item.title_ja,
-              category: item.category,
-              description: item.description,
-              descriptionSi: item.description_si,
-              descriptionTa: item.description_ta,
-              descriptionJa: item.description_ja,
-              eventDate: item.event_date,
-              registrationOpens: item.registration_opens,
-              deadline: item.deadline,
-              format: item.format || 'Online',
-              officialUrl: item.official_url,
-              status: item.status || 'Upcoming',
-              isPublished: item.is_published ?? true,
-              createdAt: item.created_at || new Date().toISOString()
-            }));
-            setAnnouncements(mapped);
+        }
+
+        if (isMounted) {
+          // Merge avoiding ID duplicates
+          const seenIds = new Set<string>();
+          const merged: AnnouncementItem[] = [];
+
+          // 1. First add CMS news
+          for (const item of cmsNewsAnnouncements) {
+            if (!seenIds.has(item.id)) {
+              seenIds.add(item.id);
+              merged.push(item);
+            }
           }
+
+          // 2. Add cloud announcements if any
+          for (const item of cloudAnnouncements) {
+            if (!seenIds.has(item.id)) {
+              seenIds.add(item.id);
+              merged.push(item);
+            }
+          }
+
+          // 3. Add initial announcements
+          for (const item of INITIAL_ANNOUNCEMENTS) {
+            if (!seenIds.has(item.id)) {
+              seenIds.add(item.id);
+              merged.push(item);
+            }
+          }
+
+          setAnnouncements(merged);
         }
       } catch {
         // Fall back gracefully to INITIAL_ANNOUNCEMENTS
@@ -86,7 +134,7 @@ export const AnnouncementsSection: React.FC = () => {
       }
     };
 
-    fetchSupabaseAnnouncements();
+    fetchDynamicData();
     return () => {
       isMounted = false;
     };

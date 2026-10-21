@@ -15,9 +15,10 @@ import {
   FileCheck2,
   ChevronRight
 } from 'lucide-react';
-import { PageId, ExamCategory } from '../types';
+import { PageId, ExamCategory, ExamEntry } from '../types';
 import { EXAM_RESOURCES } from '../data/examResources';
 import { COMPANY_INFO } from '../data/company';
+import { fetchExamEntries } from '../services/supabaseClient';
 import { SEOHead } from '../components/common/SEOHead';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { ExamResourceCard } from '../components/exams/ExamResourceCard';
@@ -51,6 +52,13 @@ export const JapaneseExamsPage: React.FC<JapaneseExamsPageProps> = ({
 
   const [selectedCategory, setSelectedCategory] = useState<ExamCategory | 'All'>('All');
   const [searchQuery, setSearchQuery] = useState('');
+  const [publishedExams, setPublishedExams] = useState<ExamEntry[]>([]);
+
+  React.useEffect(() => {
+    fetchExamEntries(true).then((res) => {
+      if (res.data) setPublishedExams(res.data);
+    });
+  }, []);
 
   const filteredExams = useMemo(() => {
     return EXAM_RESOURCES.filter(exam => {
@@ -223,6 +231,87 @@ export const JapaneseExamsPage: React.FC<JapaneseExamsPageProps> = ({
             </div>
           </div>
         </div>
+
+        {/* Dynamic CMS Published Exam Schedules */}
+        {publishedExams.length > 0 && (
+          <section className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-4">
+              <div className="flex items-center gap-2.5">
+                <div className="w-10 h-10 rounded-xl bg-rose-50 border border-rose-200 text-rose-600 flex items-center justify-center shrink-0">
+                  <Calendar className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h2 className="text-lg font-bold text-slate-900">
+                      Upcoming Examination &amp; Registration Schedule
+                    </h2>
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">
+                      Live Dynamic Schedule
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-500">
+                    Official test dates and registration deadlines managed by GlobeLink Let's Go Japan coordinators
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
+              {publishedExams.map((exam) => (
+                <div
+                  key={exam.id}
+                  className="p-4 rounded-2xl border border-slate-200 bg-slate-50/60 hover:bg-white hover:border-sky-300 transition-all flex flex-col justify-between space-y-3"
+                >
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-sky-100 text-sky-800">
+                        {exam.exam_level || 'All Levels'}
+                      </span>
+                    </div>
+
+                    <h3 className="font-bold text-sm text-slate-900 line-clamp-1">
+                      {exam.exam_name}
+                    </h3>
+
+                    {exam.description && (
+                      <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed">
+                        {exam.description}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="space-y-2 pt-2 border-t border-slate-200/80 text-xs">
+                    {exam.exam_date && (
+                      <div className="flex items-center justify-between">
+                        <span className="text-slate-500">Exam Date:</span>
+                        <span className="font-semibold text-slate-900">{exam.exam_date}</span>
+                      </div>
+                    )}
+
+                    {exam.registration_deadline && (
+                      <div className="flex items-center justify-between text-rose-700">
+                        <span className="font-medium">Registration:</span>
+                        <span className="font-bold">{exam.registration_deadline}</span>
+                      </div>
+                    )}
+
+                    {exam.registration_url && (
+                      <a
+                        href={exam.registration_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full mt-2 py-2 px-3 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-center font-semibold text-xs inline-flex items-center justify-center gap-1.5 transition-colors"
+                      >
+                        <span>Official Registration Portal</span>
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Exam Cards Grid */}
         <section className="space-y-6">

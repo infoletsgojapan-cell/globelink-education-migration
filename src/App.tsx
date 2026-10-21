@@ -21,6 +21,7 @@ import { MigrationVisaPage } from './pages/MigrationVisaPage';
 import { ContactPage } from './pages/ContactPage';
 import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
 import { TermsPage } from './pages/TermsPage';
+import { AdminPage } from './pages/AdminPage';
 
 const PAGE_PATHS: Record<PageId, string> = {
   'home': '/',
@@ -35,7 +36,8 @@ const PAGE_PATHS: Record<PageId, string> = {
   'migration-visa-support': '/migration-visa-support',
   'contact': '/contact',
   'privacy-policy': '/privacy-policy',
-  'terms-and-conditions': '/terms-and-conditions'
+  'terms-and-conditions': '/terms-and-conditions',
+  'admin': '/admin'
 };
 
 const PATH_TO_PAGE: Record<string, PageId> = {
@@ -51,7 +53,8 @@ const PATH_TO_PAGE: Record<string, PageId> = {
   '/migration-visa-support': 'migration-visa-support',
   '/contact': 'contact',
   '/privacy-policy': 'privacy-policy',
-  '/terms-and-conditions': 'terms-and-conditions'
+  '/terms-and-conditions': 'terms-and-conditions',
+  '/admin': 'admin'
 };
 
 export default function App() {
@@ -125,20 +128,26 @@ export default function App() {
         return <PrivacyPolicyPage onNavigate={handleNavigate} />;
       case 'terms-and-conditions':
         return <TermsPage onNavigate={handleNavigate} />;
+      case 'admin':
+        return <AdminPage onNavigate={handleNavigate} />;
       default:
         return <HomePage onNavigate={handleNavigate} onOpenSupabaseModal={() => setSupabaseModalOpen(true)} />;
     }
   };
 
+  const isAdminPage = currentPage === 'admin';
+
   return (
     <LanguageProvider>
       <div className="min-h-screen flex flex-col bg-slate-50 font-sans text-slate-900 selection:bg-rose-500 selection:text-white">
-        {/* Sticky Responsive Navbar */}
-        <Navbar
-          currentPage={currentPage}
-          onNavigate={handleNavigate}
-          onOpenConsultationModal={() => setConsultationModalOpen(true)}
-        />
+        {/* Sticky Responsive Navbar (hidden on dedicated admin CMS page) */}
+        {!isAdminPage && (
+          <Navbar
+            currentPage={currentPage}
+            onNavigate={handleNavigate}
+            onOpenConsultationModal={() => setConsultationModalOpen(true)}
+          />
+        )}
 
         {/* Main Page Content */}
         <main className="flex-1">
@@ -146,13 +155,15 @@ export default function App() {
         </main>
 
         {/* Floating WhatsApp Quick Action */}
-        <FloatingWhatsApp />
+        {!isAdminPage && <FloatingWhatsApp />}
 
         {/* Footer */}
-        <Footer
-          onNavigate={handleNavigate}
-          onOpenSupabaseModal={() => setSupabaseModalOpen(true)}
-        />
+        {!isAdminPage && (
+          <Footer
+            onNavigate={handleNavigate}
+            onOpenSupabaseModal={() => setSupabaseModalOpen(true)}
+          />
+        )}
 
         {/* Supabase Integration Setup Modal */}
         <SupabaseSetupModal

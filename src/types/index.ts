@@ -11,7 +11,8 @@ export type PageId =
   | 'migration-visa-support'
   | 'contact'
   | 'privacy-policy'
-  | 'terms-and-conditions';
+  | 'terms-and-conditions'
+  | 'admin';
 
 export type SupportedLanguage = 'en' | 'si' | 'ta' | 'ja';
 
@@ -185,4 +186,54 @@ export interface CareerVacancy {
   contactMethod: string;
   verificationLabel: string;
   isVerified: boolean;
+}
+
+export type InquiryStatus = 'New' | 'Contacted' | 'Completed';
+
+export interface InquiryRecord {
+  id: string;
+  created_at: string;
+  full_name: string;
+  phone: string;
+  email: string;
+  preferred_destination?: string | null;
+  service_category?: string | null;
+  education_career_interest?: string | null;
+  preferred_contact_method?: string;
+  message?: string | null;
+  consent_given?: boolean;
+  status: InquiryStatus | string;
+}
+
+export interface NewsArticle {
+  id: string;
+  title: string;
+  slug: string;
+  summary: string;
+  content: string;
+  image_url?: string | null;
+  publication_date: string;
+  publication_status: 'draft' | 'published';
+  created_at?: string;
+  updated_at?: string;
+}
+
+export interface ExamEntry {
+  id: string;
+  exam_name: string;
+  exam_level?: string | null;
+  exam_date?: string | null;
+  registration_deadline?: string | null;
+  description?: string | null;
+  registration_url?: string | null;
+  publication_status: 'draft' | 'published';
+  created_at?: string;
+  updated_at?: string;
+}
+
+export interface AdminUser {
+  id: string;
+  email: string;
+  role: string;
+  created_at?: string;
 }

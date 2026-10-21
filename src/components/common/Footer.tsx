@@ -345,6 +345,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenSupabaseModal 
             <BookOpen className="w-3 h-3" />
             XML Sitemap
           </a>
+          <span>&middot;</span>
+          <button
+            onClick={() => onNavigate('admin')}
+            className="hover:text-sky-400 transition-colors inline-flex items-center gap-1 font-semibold text-slate-400"
+          >
+            <ShieldCheck className="w-3 h-3 text-sky-500" />
+            Staff Portal / Admin CMS
+          </button>
         </div>
       </div>
     </footer>
