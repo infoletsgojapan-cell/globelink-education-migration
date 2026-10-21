@@ -44,8 +44,9 @@ export const SupabaseSetupModal: React.FC<SupabaseSetupModalProps> = ({ isOpen, 
   };
 
   const configured = isSupabaseConfigured();
+  const [activeSqlTab, setActiveSqlTab] = useState<'inquiries' | 'announcements'>('inquiries');
 
-  const sqlSchema = `-- =========================================================
+  const inquiriesSqlSchema = `-- =========================================================
 -- GlobeLink Education & Migration Consultants
 -- Inquiries Table Schema with Row Level Security (RLS)
 -- Run this in your Supabase SQL Editor (https://app.supabase.com)
@@ -69,12 +70,12 @@ CREATE TABLE IF NOT EXISTS public.inquiries (
 -- Enable Row Level Security (RLS)
 ALTER TABLE public.inquiries ENABLE ROW LEVEL SECURITY;
 
--- Allow anonymous visitors to submit new inquiries (INSERT only)
+-- Allow anonymous visitors to submit new inquiries (INSERT only with consent_given = true)
 CREATE POLICY "Allow anonymous lead insert"
   ON public.inquiries
   FOR INSERT
   TO anon
-  WITH CHECK (true);
+  WITH CHECK (consent_given = true);
 
 -- Allow authenticated administrative staff to view all inquiries
 CREATE POLICY "Allow authenticated staff read"
@@ -84,8 +85,56 @@ CREATE POLICY "Allow authenticated staff read"
   USING (true);
 `;
 
+  const announcementsSqlSchema = `-- =========================================================
+-- GlobeLink Education & Migration Consultants
+-- Announcements & Events Schema with Row Level Security (RLS)
+-- Run this in your Supabase SQL Editor (https://app.supabase.com)
+-- =========================================================
+
+CREATE TABLE IF NOT EXISTS public.announcements (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  created_at TIMESTAMPTZ DEFAULT timezone('utc'::text, now()) NOT NULL,
+  title TEXT NOT NULL,
+  title_si TEXT,
+  title_ta TEXT,
+  title_ja TEXT,
+  category TEXT NOT NULL,
+  description TEXT NOT NULL,
+  description_si TEXT,
+  description_ta TEXT,
+  description_ja TEXT,
+  event_date TIMESTAMPTZ,
+  registration_opens TIMESTAMPTZ,
+  deadline TIMESTAMPTZ,
+  format TEXT DEFAULT 'Online',
+  official_url TEXT,
+  status TEXT DEFAULT 'Upcoming',
+  is_published BOOLEAN DEFAULT true
+);
+
+-- Enable Row Level Security (RLS)
+ALTER TABLE public.announcements ENABLE ROW LEVEL SECURITY;
+
+-- 1. Public Read Policy: Anyone (anon and authenticated) can read published announcements
+CREATE POLICY "Allow public read published announcements"
+  ON public.announcements
+  FOR SELECT
+  TO anon, authenticated
+  USING (is_published = true);
+
+-- 2. Authenticated Admin Policy: Only authenticated staff can manage announcements
+CREATE POLICY "Allow authenticated staff manage announcements"
+  ON public.announcements
+  FOR ALL
+  TO authenticated
+  USING (true)
+  WITH CHECK (true);
+`;
+
+  const activeSql = activeSqlTab === 'inquiries' ? inquiriesSqlSchema : announcementsSqlSchema;
+
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(sqlSchema);
+    navigator.clipboard.writeText(activeSql);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
   };
@@ -226,20 +275,40 @@ CREATE POLICY "Allow authenticated staff read"
             </p>
           </div>
 
-          {/* SQL Script Box */}
+          {/* SQL Script Box with Tab Selector */}
           <div>
-            <div className="flex items-center justify-between mb-1.5">
-              <span className="text-xs font-semibold text-slate-700">Supabase SQL Schema</span>
+            <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+              <div className="flex items-center gap-1.5 p-1 bg-slate-100 rounded-lg">
+                <button
+                  type="button"
+                  onClick={() => setActiveSqlTab('inquiries')}
+                  className={`px-3 py-1 text-xs font-semibold rounded-md transition-colors ${
+                    activeSqlTab === 'inquiries' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+                  }`}
+                >
+                  Inquiries Schema (Leads)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveSqlTab('announcements')}
+                  className={`px-3 py-1 text-xs font-semibold rounded-md transition-colors ${
+                    activeSqlTab === 'announcements' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+                  }`}
+                >
+                  Announcements Schema (Events)
+                </button>
+              </div>
+
               <button
                 onClick={copyToClipboard}
                 className="inline-flex items-center gap-1 text-xs text-sky-700 hover:text-sky-900 font-medium bg-sky-50 hover:bg-sky-100 px-2.5 py-1 rounded-md transition-colors"
               >
                 {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
-                {copied ? 'Copied to Clipboard!' : 'Copy SQL'}
+                {copied ? 'Copied to Clipboard!' : `Copy ${activeSqlTab === 'inquiries' ? 'Inquiries' : 'Announcements'} SQL`}
               </button>
             </div>
-            <pre className="bg-slate-950 text-slate-200 text-xs p-3.5 rounded-xl overflow-x-auto max-h-48 font-mono border border-slate-800 leading-relaxed">
-              {sqlSchema}
+            <pre className="bg-slate-950 text-slate-200 text-xs p-3.5 rounded-xl overflow-x-auto max-h-56 font-mono border border-slate-800 leading-relaxed">
+              {activeSql}
             </pre>
           </div>
 

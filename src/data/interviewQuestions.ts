@@ -8,9 +8,15 @@ export const INTERVIEW_QUESTIONS: InterviewQuestion[] = [
     questionEn: 'Tell me about yourself.',
     questionJa: '自己紹介をお願いします。 (Jikoshoukai o onegaishimasu.)',
     questionSi: 'ඔබ ගැන කෙටි හැඳින්වීමක් කරන්න.',
+    questionTa: 'உங்களைப் பற்றி சுருக்கமாக கூறுங்கள்.',
     sampleAnswerEn: 'Thank you for this opportunity. My name is [Your Name], and I have a background in [Your Field/Profession, e.g., hospitality / IT / customer relations]. Over the past [Number] years, I have developed strong skills in [Key Skill 1] and [Key Skill 2]. I am dedicated, quick to adapt to multicultural environments, and enthusiastic about contributing positively to your organization.',
     sampleAnswerJa: 'はじめまして。[あなたの名前]と申します。[専門分野・職種]で[年数]年間の実務経験がございます。チームワークと適応力を強みとしており、貴社で貢献したいと考えております。本日はどうぞよろしくお願いいたします。',
+    sampleAnswerSi: 'ස්තූතියි මෙම අවස්ථාව ලබාදීම පිළිබඳව. මගේ නම [ඔබේ නම]. මට [ඔබේ ක්ෂේත්‍රය] පිළිබඳව [වසර ගණනක] සේවා පළපුරුද්දක් ඇත. කණ්ඩායම් හැඟීම, ඉක්මනින් ඉගෙනුම සහ කැපවීම මගේ ප්‍රධාන ශක්තීන් වේ. ඔබගේ ආයතනයේ උන්නතිය වෙනුවෙන් අවංකව දායක වීමට මම කැමැත්තෙමි.',
+    sampleAnswerTa: 'இந்த வாய்ப்பிற்கு நன்றி. என் பெயர் [உங்கள் பெயர்]. நான் [உங்கள் துறை] துறையில் [ஆண்டுகள்] பணி அனுபவம் பெற்றுள்ளேன். கடின உழைப்பு, அர்ப்பணிப்பு மற்றும் பல கலாச்சார சூழலுக்கு எளிதில் பழகும் திறன் ஆகியவை எனது பலங்கள். உங்கள் நிறுவனத்தின் வளர்ச்சிக்கு உண்மையாக உழைக்க விரும்புகிறேன்.',
     explanationSi: 'මෙම ප්‍රශ්නයේදී සම්මුඛ පරීක්ෂකවරයා බලාපොරොත්තු වන්නේ ඔබේ පෞද්ගලික විස්තර නොව, ඔබේ අධ්‍යාපනික හා වෘත්තීය පසුබිම, ප්‍රධාන දක්ෂතා සහ මෙම රැකියාවට ඔබේ ඇති උනන්දුව පිළිබඳ සංක්ෂිප්ත, විශ්වාසදායක සාරාංශයකි.',
+    explanationTa: 'இக்கேள்விக்கு தனிப்பட்ட விவரங்களை விட, உங்கள் கல்வி, தொழில் அனுபவம், முக்கிய திறன்கள் மற்றும் இந்நிறுவனத்தில் பணியாற்ற உள்ள ஆர்வத்தை சுருக்கமாகவும் நம்பிக்கையுடனும் கூற வேண்டும்.',
+    explanationJa: '自己紹介ではプライベートな内容ではなく、これまでの職歴、専門知識、強み、および志望動機を簡潔かつ論理的に説明することが求められます。',
+    explanationEn: 'Focus on your professional background, key transferable skills, and why this specific role aligns with your career path in a concise 60-90 second response.',
     personalizationTip: 'Keep your answer between 60 to 90 seconds. Focus on your present professional role, past relevant achievements, and why this future opportunity fits your path.'
   },
   {
@@ -19,9 +25,15 @@ export const INTERVIEW_QUESTIONS: InterviewQuestion[] = [
     questionEn: 'What are your strengths?',
     questionJa: 'あなたの長所は何ですか？ (Anata no chousho wa nan desu ka?)',
     questionSi: 'ඔබගේ ප්‍රධාන ශක්තීන් සහ දක්ෂතා මොනවාද?',
+    questionTa: 'உங்கள் பலங்கள் அல்லது திறமைகள் என்ன?',
     sampleAnswerEn: 'One of my greatest strengths is my reliability and attention to detail. In my previous work, I consistently ensured high-quality results even under tight schedules. Additionally, I communicate clearly with teammates and remain calm and solution-oriented when unexpected challenges arise.',
     sampleAnswerJa: '私の長所は、責任感と丁寧な仕事ぶりです。予期せぬトラブルが発生した際も落ち着いて原因を分析し、周囲と連携して迅速に解決策を見つけることができます。',
+    sampleAnswerSi: 'මගේ ප්‍රධාන ශක්තිය වන්නේ වගකීම් සහගත බව සහ කාර්යයන් නිරවද්‍යව ඉටු කිරීමයි. හදිසි ගැටළු වලදී සන්සුන්ව ප්‍රායෝගික විසඳුම් සෙවීම සහ කණ්ඩායමේ සාමාජිකයන් සමඟ පැහැදිලි සන්නිවේදනයක් පවත්වා ගැනීම මගේ විශේෂත්වයක් වේ.',
+    sampleAnswerTa: 'எனது முக்கிய பலம் பொறுப்புணர்வும் நுணுக்கமான கவனமும் ஆகும். நெருக்கடியான நேரங்களிலும் தரமான முடிவுகளை வழங்க என்னால் முடியும். சக ஊழியர்களுடன் நேர்மறையாக தொடர்புகொண்டு சிக்கல்களுக்கு தீர்வு காண்பதில் சிறந்து விளங்குகிறேன்.',
     explanationSi: 'මෙහිදී ඔබේ වෘත්තියට අදාළ වන සැබෑ දක්ෂතාවක් උදාහරණයක් සහිතව පැහැදිලි කරන්න. කණ්ඩායම් හැඟීම, වෙලාවට වැඩ කිරීම, හෝ ගැටළු විසඳීමේ හැකියාව වැනි ප්‍රායෝගික ගුණාංග සඳහන් කිරීම වැදගත් වේ.',
+    explanationTa: 'உங்கள் வேலைக்கு பொருத்தமான உண்மையான திறமைகளை நிஜ வாழ்க்கையின் சிறிய உதாரணத்துடன் விளக்குங்கள்.',
+    explanationJa: '職務に直結する具体的な強みを、過去の実績やエピソードと結びつけて説明することが重要です。',
+    explanationEn: 'Highlight 1 or 2 relevant core strengths supported by brief evidence from your real work experience.',
     personalizationTip: 'Pick 1 or 2 real strengths that match the job description, and always pair them with a brief practical example from your real work experience.'
   },
   {
@@ -30,9 +42,15 @@ export const INTERVIEW_QUESTIONS: InterviewQuestion[] = [
     questionEn: 'What are your weaknesses?',
     questionJa: 'あなたの短所は何ですか？ (Anata no tansho wa nan desu ka?)',
     questionSi: 'ඔබේ දුර්වලතා හෝ වැඩිදියුණු කරගත යුතු කරුණු මොනවාද?',
+    questionTa: 'உங்கள் பலவீனங்கள் அல்லது மேம்படுத்த வேண்டியவை என்ன?',
     sampleAnswerEn: 'In the past, I sometimes found it difficult to say no when coworkers asked for assistance, which occasionally overloaded my schedule. To manage this constructively, I started prioritizing my daily task list and communicating my current bandwidth respectfully so I can maintain high quality on all my commitments.',
     sampleAnswerJa: '私の短所は、頼まれた仕事を断りきれず抱え込みがちになる点でした。現在はタスクの優先順位を明確にし、状況を周囲に率直に共有して無理のない計画を立てるよう改善しております。',
+    sampleAnswerSi: 'පසුගිය කාලයේදී අන් අයගේ උදව් ඉල්ලීම් ප්‍රතික්ෂේප කිරීමට නොහැකිවීම නිසා මගේ කාර්යයන් අධික විය. දැන් මම ප්‍රමුඛතා ලැයිස්තුවක් සකස් කර කාර්යයන් නිසි වේලාවට සංවිධානාත්මකව ඉටු කිරීමට පුරුදුව සිටිමි.',
+    sampleAnswerTa: 'முன்பு மற்றவர்கள் உதவி கேட்கும்போது மறுக்க முடியாமல் அதிக வேலைச்சுமையை ஏற்றுக்கொள்வேன். இப்போது முன்னுரிமைகளை வரிசைப்படுத்தி திட்டமிட்டு செயல்படுவதன் மூலம் அதை சரிசெய்துள்ளேன்.',
     explanationSi: 'දුර්වලතාවක් ගැන විමසන විට, රැකියාවට බරපතල හානියක් නොවන කරුණක් තෝරාගෙන, එය ජය ගැනීමට ඔබ දරන උත්සාහය (action plan) ප්‍රකාශ කරන්න. කිසිවිටෙකත් "මට කිසිම දුර්වලතාවක් නැහැ" යැයි නොකියන්න.',
+    explanationTa: 'வேலைக்கு பெரிய பாதிப்பை ஏற்படுத்தாத ஒரு பலவீனத்தை கூறி, அதை சரிசெய்ய நீங்கள் எடுக்கும் நடவடிக்கைகளை விளக்குங்கள். "எனக்கு பலவீனமே இல்லை" என்று கூறாதீர்கள்.',
+    explanationJa: '致命的な短所は避け、自覚している課題とそれを改善するために実践している対策を前向きに述べます。',
+    explanationEn: 'Choose a genuine, non-critical weakness and emphasize the proactive steps you take every day to manage and improve it.',
     personalizationTip: 'Always choose a real, manageable area for growth and immediately follow up with the steps you take daily to improve.'
   },
   {
@@ -41,9 +59,15 @@ export const INTERVIEW_QUESTIONS: InterviewQuestion[] = [
     questionEn: 'Why do you want this job?',
     questionJa: 'なぜこの仕事を志したのですか？ (Naze kono shigoto o shibou shita no desu ka?)',
     questionSi: 'ඔබ මෙම රැකියාව සඳහා අයදුම් කිරීමට හේතුව කුමක්ද?',
+    questionTa: 'நீங்கள் ஏன் இந்த வேலையை விரும்புகிறீர்கள்?',
     sampleAnswerEn: 'I have researched your company and deeply respect your commitment to quality and professional standards. This position aligns directly with my career goals and hands-on skills in [Your Field]. I want to bring my dedication to your team while continuing to grow and learn in a supportive international environment.',
     sampleAnswerJa: '貴社が持つ高い品質基準とプロフェッショナリズムに深く感銘を受けました。私の[スキル・経験]を活かし、チームの目標達成に貢献したいと考え、強く志望いたしました。',
+    sampleAnswerSi: 'මම ඔබගේ ආයතනය පිළිබඳව සොයා බැලූ අතර එහි උසස් සේවා ප්‍රමිතීන් බෙහෙවින් අගය කරමි. මෙම තනතුර මගේ කුසලතාවලට හා අනාගත අරමුණු වලට ඉතා හොඳින් ගැළපෙන බැවින් සම්පූර්ණ කැපවීමෙන් සේවය කිරීමට කැමැත්තෙමි.',
+    sampleAnswerTa: 'உங்கள் நிறுவனத்தின் தொழில்முறை தரங்களை நான் பெரிதும் மதிக்கிறேன். இப்பதவி எனது திறமைகளுக்கும் தொழில் இலக்குகளுக்கும் மிகச் சரியாக பொருந்துவதால், இதில் முழு அர்ப்பணிப்புடன் பணியாற்ற விரும்புகிறேன்.',
     explanationSi: 'ආයතනය ගැන ඔබ සොයා බලා ඇති බව පෙන්වන්න. ආයතනයේ වටිනාකම් සහ ඔබේ වෘත්තීය ඉලක්ක එකිනෙක ගැළපෙන ආකාරය අවංකව විස්තර කරන්න.',
+    explanationTa: 'நிறுவனத்தைப் பற்றி நீங்கள் முன்கூட்டியே அறிந்துள்ளீர்கள் என்பதையும், உங்கள் இலக்குகள் அவர்களின் தேவைகளுடன் எவ்வாறு ஒத்துப்போகின்றன என்பதையும் காட்டுங்கள்.',
+    explanationJa: '企業研究をしっかり行っていることを示し、企業理念や事業内容と自身のキャリアビジョンが合致している理由を伝えます。',
+    explanationEn: 'Demonstrate that you have researched the company and connect your background authentically to their needs.',
     personalizationTip: 'Mention a specific aspect of the company, hotel, or organization that impressed you during your pre-interview research.'
   },
   {
@@ -52,9 +76,15 @@ export const INTERVIEW_QUESTIONS: InterviewQuestion[] = [
     questionEn: 'Why should we hire you?',
     questionJa: '私たちがあなたを採用すべき理由は何ですか？ (Watashitachi ga anata o saiyou subeki riyuu wa nan desu ka?)',
     questionSi: 'අප ඔබව මෙම තනතුර සඳහා තෝරාගත යුත්තේ ඇයි?',
+    questionTa: 'நாங்கள் உங்களை ஏன் தேர்வு செய்ய வேண்டும்?',
     sampleAnswerEn: 'You should hire me because I offer a unique combination of relevant skills, a strong work ethic, and a positive attitude. I am dedicated to punctuality and eager to absorb new procedures quickly. I treat employer responsibilities with sincerity and take pride in delivering dependable results.',
     sampleAnswerJa: '業務に対する誠実な姿勢と、新しい環境への迅速な適応力があるからです。指示された業務を正確にこなすだけでなく、チーム全体の円滑な運営に積極的に貢献できます。',
+    sampleAnswerSi: 'මම වෙලාවට වැඩ කිරීම, නව දේවල් ඉක්මනින් ඉගෙන ගැනීම සහ සේවා ස්ථාන නීතිරීතිවලට ගරු කිරීම ඉහළින්ම අගය කරමි. මගේ කුසලතා සහ අවංක සේවය ආයතනයට වටිනාකමක් එක් කරනු ඇතැයි මම විශ්වාස කරමි.',
+    sampleAnswerTa: 'சரியான நேரத்தில் பணிபுரிதல், புதிய நடைமுறைகளை விரைவாகக் கற்றல் மற்றும் பொறுப்புணர்வு ஆகியவை எனது சிறப்பு. எனது அர்ப்பணிப்பு நிறுவனத்திற்கு நல்ல பலன்களைத் தரும் என நம்புகிறேன்.',
     explanationSi: 'අනෙක් අය සමඟ සංසන්දනය කිරීමෙන් තොරව, ඔබේ කැපවීම, වේලාවට වැඩ කිරීම, නව දේවල් ඉගෙනීමේ උනන්දුව සහ ආයතනයට ලබාදිය හැකි වටිනාකම අවධාරණය කරන්න.',
+    explanationTa: 'பிறருடன் ஒப்பிடாமல், உங்கள் நேரந்தவறாமை, நம்பகத்தன்மை மற்றும் அர்ப்பணிப்பை வெளிப்படுத்துங்கள்.',
+    explanationJa: '他者との比較ではなく、自身の強み、意欲、そして早期に成果を出せる理由を説得力を持って伝えます。',
+    explanationEn: 'Emphasize your personal reliability, swift learning curve, and dedication to delivering consistent results.',
     personalizationTip: 'Focus on your trustworthiness, willingness to follow workplace rules, and steady dedication.'
   },
   {
@@ -63,9 +93,15 @@ export const INTERVIEW_QUESTIONS: InterviewQuestion[] = [
     questionEn: 'How do you handle challenges at work?',
     questionJa: '仕事で困難に直面したとき、どのように対処しますか？ (Shigoto de konnan ni chokumen shita toki, dono you ni taisho shimasu ka?)',
     questionSi: 'සේවා ස්ථානයේදී මතුවන අභියෝග හෝ ගැටළු ඔබ නිරාකරණය කරගන්නේ කෙසේද?',
+    questionTa: 'பணியிடத்தில் ஏற்படும் சவால்களை நீங்கள் எவ்வாறு கையாளுவீர்கள்?',
     sampleAnswerEn: 'When facing a challenge, I first stay calm and assess the root cause of the issue. I prioritize practical solutions, seek advice from supervisors when appropriate, and communicate transparently. Afterward, I reflect on what happened to prevent similar issues from recurring.',
     sampleAnswerJa: 'まずは焦らず冷静に状況を把握し、原因を分析します。自分で対応できる範囲を確認しつつ、必要に応じて速やかに上司に相談・報告（報連相）を行い、再発防止策を講じます。',
+    sampleAnswerSi: 'ගැටලුවක් මතු වූ විට මුලින්ම කලබල නොවී එහි මූලික හේතුව සොයා බලමි. ප්‍රායෝගික විසඳුම් ක්‍රියාත්මක කරමින්, අවශ්‍ය අවස්ථාවලදී ප්‍රධානීන් දැනුවත් කර අනාගතයේදී එවැනි ගැටළු නැවත ඇතිවීම වැළැක්වීමට පියවර ගනිමි.',
+    sampleAnswerTa: 'சிக்கல் ஏற்படும் போது பதற்றமடையாமல் மூல காரணத்தை ஆராய்வேன். தகுந்த தீர்வுகளை எடுத்துக்கொண்டு, தேவையான போது அதிகாரிகளுடன் ஆலோசித்து மீண்டும் நிகழாமல் பார்த்துக்கொள்வேன்.',
     explanationSi: 'මෙහිදී බලන්නේ ඔබ පීඩනය හමුවේ කලබල නොවී සන්සුන්ව ප්‍රශ්නය වටහාගෙන, අවශ්‍ය නම් උසස් නිලධාරීන්ගේ උපදෙස් ලබාගනිමින් ක්‍රියාත්මක වන ආකාරයයි.',
+    explanationTa: 'பதற்றமின்றி, அமைதியாக காரணத்தை பகுப்பாய்வு செய்து தீர்வு காணும் திறனை வெளிப்படுத்துங்கள்.',
+    explanationJa: '困難に対して感情的にならず、原因を論理的に分析し、報連相を活用してチームで再発防止を図る姿勢を伝えます。',
+    explanationEn: 'Demonstrate composure under pressure, analytical problem-solving, and proactive communication with seniors.',
     personalizationTip: 'Use a real brief scenario where you stayed calm, communicated with your team, and solved a problem systematically.'
   },
   {
@@ -74,9 +110,15 @@ export const INTERVIEW_QUESTIONS: InterviewQuestion[] = [
     questionEn: 'What are your career goals?',
     questionJa: 'あなたの将来のキャリア目標は何ですか？ (Anata no shourai no kyaria mokuhyou wa nan desu ka?)',
     questionSi: 'ඔබේ ඉදිරි වෘත්තීය ඉලක්ක මොනවාද?',
+    questionTa: 'உங்கள் எதிர்கால தொழில் இலக்குகள் என்ன?',
     sampleAnswerEn: 'In the short term, I want to master my job duties, adapt thoroughly to your workplace standards, and become a dependable team member. In the long term, I aspire to take on greater responsibilities, enhance my technical and language capabilities, and contribute to mentoring new team members.',
     sampleAnswerJa: '短期的には、業務手順を完璧に習得し、信頼されるメンバーになることです。長期的には、専門スキルと語学力をさらに高め、チームをリードできる人材へと成長したいと考えています。',
-    explanationSi: 'කෙටි කාලීන (මුල් මාස කිහිපය තුළ කාර්යයන් නිවැරදිව ඉගෙනීම) සහ දිගු කාලීන (ආයතනය තුළ වර්ධනය වීම හා වැඩි වගකීම් දැරීම) ඉලක්ක සමබරව දක්වන්න.',
+    sampleAnswerSi: 'කෙටි කාලීනව, මගේ රාජකාරි සම්පූර්ණයෙන් ප්‍රගුණ කර ආයතනයට විශ්වාසදායක සේවකයෙකු වීම මගේ අරමුණයි. දිගු කාලීනව, මගේ භාෂා සහ තාක්ෂණික කුසලතා වර්ධනය කරගෙන වැඩි වගකීම් භාරගැනීමට බලාපොරොත්තු වෙමි.',
+    sampleAnswerTa: 'குறுகிய காலத்தில் எனது பணிகளை முழுமையாகக் கற்றுக்கொண்டு சிறந்த பணியாளராக மாறுவது. நீண்ட காலத்தில் மேலதிக பொறுப்புகளை ஏற்றுக்கொண்டு, நிறுவனத்தில் மேலும் வளருவது.',
+    explanationSi: 'කෙටි කාලීන සහ දිගු කාලීන ඉලක්ක සමබරව දක්වමින්, ආයතනය තුළ ස්ථාවරව සේවය කිරීමට ඇති කැමැත්ත ප්‍රකාශ කරන්න.',
+    explanationTa: 'நிறுவனத்தில் நீண்ட காலம் தங்கி முன்னேற விரும்புகிறீர்கள் என்பதை குறுகிய மற்றும் நீண்ட கால இலக்குகள் மூலம் தெளிவுபடுத்துங்கள்.',
+    explanationJa: '企業への長期的な定着意欲と、段階的な成長意欲を明確に示します。',
+    explanationEn: 'Show balance between mastering your immediate responsibilities and long-term loyalty to the organization.',
     personalizationTip: 'Ensure your goals show stability and long-term commitment to the employer rather than treating the job as a stepping stone.'
   },
   {
@@ -85,9 +127,15 @@ export const INTERVIEW_QUESTIONS: InterviewQuestion[] = [
     questionEn: 'How do you work in a team?',
     questionJa: 'チームでどのように協力して働きますか？ (Chiimu de dono you ni kyouryoku shite hatarakimasu ka?)',
     questionSi: 'ඔබ කණ්ඩායමක් තුළ සහයෝගයෙන් සේවය කරන්නේ කෙසේද?',
+    questionTa: 'நீங்கள் ஒரு குழுவில் எவ்வாறு இணைந்து பணியாற்றுவீர்கள்?',
     sampleAnswerEn: 'I believe effective teamwork is built on active listening, clear communication, and mutual respect. I always deliver my assigned responsibilities on time, offer support to teammates when needed, and maintain a cooperative, positive attitude so the entire team succeeds together.',
     sampleAnswerJa: 'お互いを尊重し、明確な報告・連絡・相談を行うことを心がけています。自分の役割を責任を持って果たすと同時に、困っている同僚を助け合い、チーム全体の目標達成に向けて協力します。',
+    sampleAnswerSi: 'සාර්ථක කණ්ඩායම් හැඟීමක් ගොඩනැගෙන්නේ ගෞරවනීය සවන්දීම සහ පැහැදිලි සන්නිවේදනය මගිනි. මම මගේ කාර්යයන් නියමිත වේලාවට අවසන් කර, අවශ්‍ය විටෙක සගයන්ට සහය වෙමි.',
+    sampleAnswerTa: 'நல்ல குழுப்பணி என்பது பரஸ்பர மரியாதை மற்றும் தெளிவான தொடர்பில் தங்கியுள்ளது. எனது பணிகளை சரியான நேரத்தில் முடித்து, சக ஊழியர்களுக்கும் உதவுவேன்.',
     explanationSi: 'කණ්ඩායම් හැඟීම විමසන විට, තමාගේ වගකීම නියමිත වේලාවට ඉටු කිරීම, අනෙක් අයට ගෞරවයෙන් සවන් දීම සහ අන්‍යෝන්‍ය සහයෝගය ලබාදීම පිළිබඳ අවධාරණය කරන්න.',
+    explanationTa: 'குழுவாக இலக்குகளை அடைய உங்கள் ஒத்துழைப்பும் அர்ப்பணிப்பும் எவ்வளவு முக்கியம் என்பதை விளக்குங்கள்.',
+    explanationJa: '周囲への気配り、協調性、および自分の担当業務に対する確実な遂行力をアピールします。',
+    explanationEn: 'Focus on accountability for your own duties while demonstrating supportive collaboration toward team goals.',
     personalizationTip: 'Provide an example where you contributed to a shared workplace success.'
   },
 
@@ -98,9 +146,15 @@ export const INTERVIEW_QUESTIONS: InterviewQuestion[] = [
     questionEn: 'How would you introduce yourself in Japanese?',
     questionJa: '日本語で自己紹介をしてください。 (Nihongo de jikoshoukai o shite kudasai.)',
     questionSi: 'ජපන් භාෂාවෙන් ඔබේ ස්වයං හැඳින්වීමක් (Jikoshoukai) සිදු කරන්නේ කෙසේද?',
+    questionTa: 'ஜப்பானிய மொழியில் உங்களை எவ்வாறு அறிமுகப்படுத்துவீர்கள்?',
     sampleAnswerEn: 'Hajimemashite. Watashi wa [Your Name] to moushimasu. Suriranka kara mairimashita. Senkou wa [Your Field / Major] desu. Nihon de takusan no koto o manabi, seiippai hatarakitai to omotte orimasu. Douzo yoroshiku onegaishimasu.',
     sampleAnswerJa: '初めまして。私は[名前]と申します。スリランカから参りました。専攻は[専攻・専門]です。日本で多くの技術を学び、誠心誠意仕事に取り組みたいと考えております。どうぞよろしくお願いいたします。',
+    sampleAnswerSi: 'හජිමෙමෂිතෙ. වතෂි වා [ඔබේ නම] තෝ මෞෂිමාස්. සුරිරංකා කර මයිරිමෂිතා. සෙන්කෝ වා [විශේෂඥ ක්ෂේත්‍රය] දෙස්. නිහොන් දෙ තකුසන් නො කොතො ඔ මනබි, සෙයිඉප්පයි හතරකිතයි තො ඔමොත්තෙ ඔරිමාස්. දෝසෝ යොරොෂිකු ඔනෙගයිෂිමාස්.',
+    sampleAnswerTa: 'ஹஜிமேமாஷிதே. வதாஷி வா [உங்கள் பெயர்] தோ மௌஷிமாஸ். ஸ்ரீலங்கா காரா மைரிமாஷிதா. நிஹோன் தே சேயிப்பை ஹதரகிதாய் தோ ஓமொத்தே ஒரிமாஸ். தோஸோ யோரோஷிகு ஓனேகைஷிமாஸ்.',
     explanationSi: 'ජපන් සම්මුඛ පරීක්ෂණයක් ආරම්භයේදී අනිවාර්යයෙන්ම "ජිකෝෂෝකායි" (ස්වයං හැඳින්වීම) විමසයි. මෙහිදී නම, උපන් රට (ශ්‍රී ලංකාව), ප්‍රධාන ක්ෂේත්‍රය, ජපානයේ වැඩ කිරීමට ඇති කැපවීම සහ "දෝසෝ යොරොෂිකු ඔනෙගායිෂිමාස්" ආචාරශීලී වචන නිවැරදි උච්චාරණයෙන් පැවසීම ඉතා වැදගත් වේ.',
+    explanationTa: 'ஜப்பானிய நேர்காணலின் தொடக்கத்தில் "ஜிகோஷோகாய்" கேட்கப்படும். பெயர், நாடு, துறை மற்றும் மரியாதையான வணக்கத்தை தெளிவாகக் கூற வேண்டும்.',
+    explanationJa: '日本企業の面接では必須の項目です。明るい表情で姿勢を正し、相手の目を見てハキハキと挨拶します。',
+    explanationEn: 'Deliver this traditional Jikoshoukai with a polite bow, clear pronunciation, and confident posture.',
     personalizationTip: 'Practice this aloud until it flows naturally and smoothly without stuttering, with a clear standing bow (Rei).'
   },
   {
@@ -109,9 +163,15 @@ export const INTERVIEW_QUESTIONS: InterviewQuestion[] = [
     questionEn: 'Why do you want to work in Japan?',
     questionJa: '日本で働きたい理由は何ですか？ (Nihon de hatarakitai riyuu wa nan desu ka?)',
     questionSi: 'ඔබ ජපානයේ සේවය කිරීමට කැමති වන්නේ ඇයි?',
+    questionTa: 'நீங்கள் ஏன் ஜப்பானில் பணியாற்ற விரும்புகிறீர்கள்?',
     sampleAnswerEn: 'I have always admired Japan\'s advanced technology, work discipline, and high service quality. Working in Japan will allow me to learn international best practices, enhance my Japanese language proficiency, and build a stable professional career while contributing honestly to the Japanese economy.',
     sampleAnswerJa: '日本の高い技術力、規律正しさ、そして「おもてなし」の心に以前から深い敬意を抱いておりました。日本で働き、国際水準の技術を身につけ、日本語力を向上させながら誠実に貢献したいと考えております。',
+    sampleAnswerSi: 'ජපානයේ උසස් තාක්ෂණය, සේවා විනය සහ උසස් ප්‍රමිතීන් මම බෙහෙවින් අගය කරමි. ජපානයේ සේවය කිරීම මගේ වෘත්තීය දැනුම දියුණු කරගැනීමටත්, ජපන් භාෂාව වැඩිදියුණු කරගැනීමටත් අනගි අවස්ථාවකි.',
+    sampleAnswerTa: 'ஜப்பானின் உயர் தொழில்நுட்பம், வேலை ஒழுக்கம் மற்றும் தரமான சேவைகளை நான் பெரிதும் மதிக்கிறேன். அங்கு பணிபுரிவது எனது தொழில்முறை திறமையையும் மொழியறிவையும் உயர்த்தும்.',
     explanationSi: 'ජපානය තෝරාගැනීමට හේතුව විමසන විට, ජපානයේ සේවා සංස්කෘතිය (work discipline), තාක්ෂණය, සේවා ගුණාත්මකභාවය සහ භාෂාව ඉගෙනීම කෙරෙහි ඔබේ ඇති සැබෑ කැමැත්ත ප්‍රකාශ කරන්න.',
+    explanationTa: 'ஜப்பானிய பணி ஒழுக்கம், தொழில்நுட்பம் மற்றும் மொழி மீதான உங்கள் ஆர்வத்தை தெளிவாகக் கூறுங்கள்.',
+    explanationJa: '日本に対する好意だけでなく、業務を通じてどのように貢献し成長したいかを具体的に述べます。',
+    explanationEn: 'Link your rationale to Japan\'s professional discipline and the language training you have undertaken.',
     personalizationTip: 'Connect your interest to the Japanese language training you have undertaken with Let\'s Go Japan and your dedication to learning Japanese manners.'
   },
   {
@@ -120,9 +180,15 @@ export const INTERVIEW_QUESTIONS: InterviewQuestion[] = [
     questionEn: 'Tell me your strengths and weaknesses in Japanese interview format.',
     questionJa: '長所と短所を教えてください。 (Chousho to tansho o oshiete kudasai.)',
     questionSi: 'ඔබේ ශක්තීන් (දක්ෂතා) සහ දුර්වලතා පිළිබඳව පැහැදිලි කරන්න.',
+    questionTa: 'உங்கள் பலங்கள் மற்றும் பலவீனங்களை ஜப்பானிய நேர்காணல் முறையில் விளக்குங்கள்.',
     sampleAnswerEn: 'My strength is perseverance; I never give up easily when learning complex tasks. As for a weakness, I sometimes focus so deeply on details that I double-check repeatedly. To balance this, I set time limits for each task and communicate regularly with my supervisor to maintain efficiency.',
     sampleAnswerJa: '長所は粘り強さで、困難な課題にも諦めずに取り組みます。短所は細部にこだわりすぎて確認に時間をかける傾向がある点です。現在は作業ごとに時間配分を意識し、迅速に進めるよう改善に努めています。',
+    sampleAnswerSi: 'මගේ ශක්තිය වන්නේ නොපසුබට උත්සාහයයි. දුර්වලතාවය ලෙස කාර්යයන් නිරවද්‍ය කිරීමට වැඩි වේලාවක් ගැනීම දැක්විය හැකි අතර, දැන් මම කාලසටහනකට අනුව කාර්යක්ෂමව වැඩ කිරීමට පුරුදුව සිටිමි.',
+    sampleAnswerTa: 'எனது பலம் விடாமுயற்சி. பலவீனம் என்னவென்றால் வேலையை பலமுறை சரிபார்ப்பது; இப்போது நேரத்தை சரியாக ஒதுக்கி விரைவாக முடிக்க பழகியுள்ளேன்.',
     explanationSi: 'දුර්වලතාවක් පවසන විට, එය ඔබේ කාර්යයට විශාල හානියක් නොවන එකක් විය යුතු අතර, එය මඟහරවා ගැනීමට ඔබ ගන්නා පියවර (solution) අනිවාර්යයෙන්ම සඳහන් කළ යුතුය.',
+    explanationTa: 'பலவீனத்தைக் கூறும்போது, அதை சரிசெய்ய நீங்கள் எடுக்கும் முயற்சிகளையும் சேர்த்து கூற வேண்டும்.',
+    explanationJa: '長所は謙虚かつ具体的に、短所は自己分析の深さと改善努力を伝えます。',
+    explanationEn: 'Demonstrate mature self-awareness and active mitigation of your personal growth areas.',
     personalizationTip: 'Never say "I have no weaknesses". Acknowledging a manageable habit and explaining how you manage it shows mature self-awareness.'
   },
   {
@@ -131,9 +197,15 @@ export const INTERVIEW_QUESTIONS: InterviewQuestion[] = [
     questionEn: 'How do you practice the Japanese "Hou-Ren-Sou" principle?',
     questionJa: '「報連相（ほうれんそう）」をどのように実践していますか？ (Hou-Ren-Sou o dono you ni jissen shite imasu ka?)',
     questionSi: 'ජපන් සේවා ස්ථානවල භාවිතා වන "හෝ-රෙන්-සෝ" (වාර්තා කිරීම, සම්බන්ධීකරණය, උපදෙස් ලබාගැනීම) ක්‍රමය ඔබ ප්‍රායෝගිකව භාවිතා කරන්නේ කෙසේද?',
+    questionTa: 'ஜப்பானிய "ஹௌ-ரென்-ஸோ" (அறிக்கை-தொடர்பு-ஆலோசனை) கொள்கையை எவ்வாறு நடைமுறைப்படுத்துவீர்கள்?',
     sampleAnswerEn: 'I understand that Hou-Ren-Sou (Hokoku = Report, Renraku = Communicate, Sodan = Consult) is the backbone of Japanese teamwork. I report task completions and any delays immediately, communicate updates to all concerned teammates, and consult my senior colleagues whenever I encounter ambiguity before making unilateral assumptions.',
     sampleAnswerJa: '業務の進捗や問題が発生した際は、自己判断せず速やかに上司へ「報告」し、関係者への「連絡」を徹底し、疑問や判断に迷う点は事前に「相談」することを心がけています。',
+    sampleAnswerSi: 'ජපන් කණ්ඩායම් සංස්කෘතියේ පදනම "හෝ-රෙන්-සෝ" බව මම දනිමි. වැඩ අවසන් වීම හෝ ප්‍රමාදයන් වහාම වාර්තා කිරීම (Hokoku), තොරතුරු නිවැරදිව දැනුම් දීම (Renraku) සහ සැක සහිත අවස්ථාවල උපදෙස් ලබාගැනීම (Sodan) මම අනිවාර්යයෙන්ම පිළිපදිමි.',
+    sampleAnswerTa: 'ஜப்பானிய குழுப்பணியின் உயிர்நாடி "ஹௌ-ரென்-ஸோ". பணிகளின் நிலையை உடனடியாக அறிக்கையிடுதல் (ஹோகோகு), தகவல்களை பகிர்தல் (ரென்ரகு) மற்றும் சந்தேகங்களுக்கு ஆலோசனை பெறுதல் (ஸோதான்) ஆகியவற்றை கண்டிப்பாகப் பின்பற்றுவேன்.',
     explanationSi: 'ජපන් ආයතනයක වැඩ කිරීමේදී තනිවම තීරණ නොගෙන, ප්‍රධානීන් දැනුවත් කිරීම, තොරතුරු හුවමාරු කරගැනීම සහ උපදෙස් ලබාගැනීම (Report, Communicate, Consult) අතිශය තීරණාත්මක පිළිවෙතකි.',
+    explanationTa: 'சுயமாக முடிவெடுக்காமல் மேலதிகாரிகளுக்கு அறிவித்து, ஆலோசித்து செயல்படுவது ஜப்பானிய நிறுவனங்களில் மிகவும் மதிக்கப்படும் பண்பாகும்.',
+    explanationJa: '日本企業の基本である報連相について、自己判断を避け、迅速な報告と事前の相談を行う重要性を理解していることを伝えます。',
+    explanationEn: 'Demonstrate that you never conceal issues and always operate transparently within the team hierarchy.',
     personalizationTip: 'Emphasize that you never hide small mistakes; you report them immediately so the team can address them together.'
   },
 
@@ -144,9 +216,15 @@ export const INTERVIEW_QUESTIONS: InterviewQuestion[] = [
     questionEn: 'Where do you see yourself in 3 to 5 years?',
     questionJa: '3〜5年後、どのようになっていたいですか？ (San kara go nen go, dono you ni natte itai desu ka?)',
     questionSi: 'ඉදිරි වසර 3 සිට 5 දක්වා කාලය තුළ ඔබ සිටීමට බලාපොරොත්තු වන්නේ කුමන මට්ටමකද?',
+    questionTa: 'அடுத்த 3 முதல் 5 ஆண்டுகளில் நீங்கள் எந்த நிலையில் இருக்க விரும்புகிறீர்கள்?',
     sampleAnswerEn: 'In three to five years, I envision myself as a senior, fully competent professional within this organization. I hope to have mastered all advanced workplace systems, achieved higher certifications, and earned the trust to guide and support junior team members.',
     sampleAnswerJa: '3年から5年後には、業務全般に精通した中核メンバーとして信頼され、より責任のある業務を担い、後輩の育成にも貢献できる人材になっていたいと考えております。',
+    sampleAnswerSi: 'ඉදිරි වසර 3-5 තුළ, මෙම ආයතනයේ පළපුරුදු, විශ්වාසවන්ත ප්‍රධාන සාමාජිකයෙකු වීමටත්, උසස් සහතික ලබා ගනිමින් නවක සාමාජිකයින්ට මඟපෙන්වීමටත් මම බලාපොරොත්තු වෙමි.',
+    sampleAnswerTa: 'அடுத்த 3-5 ஆண்டுகளில், இந்நிறுவனத்தில் முழுமையான திறமை வாய்ந்த மூத்த பணியாளராக உயர்ந்து, புதிய பணியாளர்களுக்கு வழிகாட்டும் நிலையை அடைய விரும்புகிறேன்.',
     explanationSi: 'මෙහිදී HR නිලධාරීන් සොයා බලන්නේ ඔබේ ස්ථාවරභාවය (stability) සහ ආයතනය තුළ රැඳී සිටිමින් අඛණ්ඩව වර්ධනය වීමට ඇති සැබෑ උනන්දුවයි.',
+    explanationTa: 'நிறுவனத்தில் நிலைத்திருந்து படிப்படியாக வளர வேண்டும் என்ற உங்கள் எண்ணத்தை வெளிப்படுத்துங்கள்.',
+    explanationJa: '転職前提ではなく、自社で長期的に成果を出し続け、将来の中核を担う意欲があるかをチェックされます。',
+    explanationEn: 'Demonstrate retention, stability, and professional progression within the company.',
     personalizationTip: 'Show that you are committed to realistic professional growth inside the organization rather than frequently job-hopping.'
   },
   {
@@ -155,102 +233,35 @@ export const INTERVIEW_QUESTIONS: InterviewQuestion[] = [
     questionEn: 'How do you handle working overtime or on busy shifts?',
     questionJa: '残業や繁忙期のシフトには対応できますか？ (Zangyou ya hankyouki no shifuto ni wa taiou dekimasu ka?)',
     questionSi: 'අවශ්‍ය අවස්ථාවලදී අතිකාල (Overtime) හෝ කාර්යබහුල වැඩමුර වල සේවය කිරීමට ඔබට හැකිද?',
+    questionTa: 'அதிக வேலை நேரம் அல்லது அவசர பணி நேரங்களை நீங்கள் எவ்வாறு கையாளுவீர்கள்?',
     sampleAnswerEn: 'Yes, I fully understand that peak operational periods and urgent customer requirements occasionally require overtime or shift adjustments. I am physically fit, flexible with my schedule, and ready to support the team whenever business demands require it.',
     sampleAnswerJa: 'はい、繁忙期や突発的な業務が発生した際は、業務の円滑な進行のために柔軟に残業やシフト変更に対応いたします。健康管理にも日頃から留意しております。',
+    sampleAnswerSi: 'ඔව්, කාර්යබහුල කාලසීමාවලදී අතිකාල සේවය අවශ්‍ය වන බව මම හොඳින් වටහාගෙන සිටිමි. මම හොඳ ශාරීරික සෞඛ්‍යයකින් පසුවන අතර ආයතනයේ අවශ්‍යතාවය පරිදි සහය වීමට සූදානම්.',
+    sampleAnswerTa: 'ஆம், தேவைப்படும் போது அதிக நேரம் பணிபுரியவும் ஷிப்ட் மாற்றங்களை ஏற்றுக்கொள்ளவும் நான் தயாராக உள்ளேன். நல்ல உடல் ஆரோக்கியத்துடன் குழுவிற்கு ஒத்துழைப்பேன்.',
     explanationSi: 'ජාත්‍යන්තර ආයතන, විශේෂයෙන් හෝටල් ක්ෂේත්‍රය, කර්මාන්තශාලා හෝ සේවා අංශවල කාර්යබහුල අවස්ථාවලදී සහයෝගය දැක්වීමට ඔබේ ඇති නම්‍යශීලී බව සහ සූදානම තහවුරු කරන්න.',
+    explanationTa: 'அவசர தேவைகளின் போது நிறுவனத்திற்கு உதவ நீங்கள் தயாராக உள்ளீர்கள் என்பதை உறுதிப்படுத்துங்கள்.',
+    explanationJa: '体力面や健康管理への配慮を述べつつ、繁忙期のチームへの貢献意欲と柔軟な対応力を示します。',
+    explanationEn: 'Assure employers of your schedule flexibility and physical resilience during peak operational seasons.',
     personalizationTip: 'Highlight your good physical health and readiness to collaborate during critical company delivery times.'
   },
-  {
-    id: 'hr-3',
-    category: 'HR Interview Questions',
-    questionEn: 'Why did you leave (or why are you planning to leave) your current job?',
-    questionJa: '前職の退職理由（転職理由）を教えてください。 (Zenshoku no taishoku riyuu o oshiete kudasai.)',
-    questionSi: 'ඔබ පෙර සේවය කළ රැකියාවෙන් ඉවත් වීමට හේතුව කුමක්ද?',
-    sampleAnswerEn: 'I am deeply grateful for the experience and skills I gained with my previous employer. However, I am seeking new challenges in an international environment where I can expand my global perspective, utilize my language abilities, and take on broader professional responsibilities.',
-    sampleAnswerJa: '前職では多くのことを学ばせていただき感謝しております。さらに国際的な環境で視野を広げ、語学力と専門性を高めながら新たな挑戦をしたいと考え、転職を決意いたしました。',
-    explanationSi: 'කිසිවිටකත් පෙර ආයතනයට හෝ කළමනාකාරීත්වයට දොස් නොකියන්න. ඔබ ඉදිරියට යාමටත්, නව කුසලතා අත්පත් කරගැනීමටත් දක්වන ධනාත්මක උනන්දුව පමණක් අවධාරණය කරන්න.',
-    personalizationTip: 'Keep the explanation strictly positive and forward-looking, emphasizing growth and international career progression.'
-  },
 
-  // 4. English Interview Practice
-  {
-    id: 'eng-1',
-    category: 'English Interview Practice',
-    questionEn: 'How do you work in a team with people from different cultural backgrounds?',
-    questionJa: '異文化のチームメンバーとどのように協働しますか？ (Ibunkawa no chiimu menbaa to dono you ni kyoudou shimasu ka?)',
-    questionSi: 'විවිධ සංස්කෘතික පසුබිම් සහිත කණ්ඩායම් සාමාජිකයන් සමඟ ඔබ සහයෝගයෙන් කටයුතු කරන්නේ කෙසේද?',
-    sampleAnswerEn: 'I value active listening, mutual respect, and clear communication. When working with multicultural colleagues, I remain patient, respect diverse customs, and ensure that instructions and common goals are understood by everyone. Team harmony leads to the best collective outcome.',
-    sampleAnswerJa: '多様性を尊重し、相手の意見に耳を傾けることを最も大切にしています。お互いの文化や価値観を理解し合い、共通の目的に向かって協力することで、強いチームワークを築きます。',
-    explanationSi: 'ඩුබායි, ජපානය හෝ මාලදිවයින වැනි රටවල සේවය කිරීමේදී බහු-සංස්කෘතික (multicultural) කණ්ඩායම් හමුවන බැවින්, අන්‍යෝන්‍ය ගෞරවය සහ ඉවසීම පෙන්වීම ඉතා වැදගත් වේ.',
-    personalizationTip: 'Describe how you maintain courteous tone, open-mindedness, and focus on the common mission of the workplace.'
-  },
-  {
-    id: 'eng-2',
-    category: 'English Interview Practice',
-    questionEn: 'Can you describe a time when you received constructive criticism and how you handled it?',
-    questionJa: 'フィードバックや指摘を受けた際、どのように対応しましたか？ (Fiidobakku ya shiteki o uketa sai, dono you ni taiou shimashita ka?)',
-    questionSi: 'ඔබේ සේවය පිළිබඳව කළමනාකාරිත්වයෙන් හෝ ප්‍රධානියෙකුගෙන් උපදෙසක් හෝ විවේචනයක් ලැබුණු විට ඔබ ඊට මුහුණ දුන්නේ කෙසේද?',
-    sampleAnswerEn: 'I appreciate constructive feedback because it helps me improve. In a previous role, my supervisor suggested that I improve the formatting of my shift handover notes. I thanked them sincerely, reviewed the recommended template immediately, and adopted the new format consistently moving forward.',
-    sampleAnswerJa: '建設的なご指摘は成長の機会として真摯に受け止めます。前職でも上司からアドバイスをいただいた際は、感謝の意を伝え、すぐに業務の改善に取り組みました。',
-    explanationSi: 'මෙහිදී සම්මුඛ පරීක්ෂකවරයා බලන්නේ ඔබ විවේචන හමුවේ කේන්ති නොගෙන, එය තමාගේ වෘත්තීය ගුණාත්මකභාවය වැඩිදියුණු කරගැනීමට අවස්ථාවක් කරගන්නේ කෙසේද යන්නයි.',
-    personalizationTip: 'Show that you listen without defensiveness, express gratitude for guidance, and take immediate corrective action.'
-  },
-
-  // 5. Workplace Communication
-  {
-    id: 'comm-1',
-    category: 'Workplace Communication',
-    questionEn: 'What would you do if you made an error during your work duties?',
-    questionJa: '業務でミスをしてしまった場合、どうしますか？ (Gyoumu de misu o shite shimatta baai, dou shimasu ka?)',
-    questionSi: 'රාජකාරියේදී ඔබ අතින් වරදක් සිදුවුවහොත් ඔබ මුලින්ම කුමක් කරන්නේද?',
-    sampleAnswerEn: 'If I realize I made a mistake, I immediately inform my supervisor without hiding or delaying. I explain the exact facts honestly, apologize for the inconvenience, and propose an immediate corrective action to minimize any impact on customers or the team.',
-    sampleAnswerJa: 'ミスに気づいた時点で隠さず、速やかに上司へありのままの事実を報告して謝罪します。その後、被害を最小限に抑える対策を講じ、同じ過ちを繰り返さないための改善策を徹底します。',
-    explanationSi: 'ජාත්‍යන්තර ආයතනවල අවංකභාවය අංක එක වේ. වැරැද්දක් සැඟවීම හෝ ප්‍රමාද කිරීම බරපතල වරදක් වන අතර, වහාම ප්‍රධානියාට දන්වා පිළියම් යෙදීම වගකිවයුතු සේවකයෙකුගේ ලක්ෂණයකි.',
-    personalizationTip: 'Honesty and speed of reporting are always rewarded far more than trying to cover up an issue.'
-  },
-  {
-    id: 'comm-2',
-    category: 'Workplace Communication',
-    questionEn: 'How do you ensure clear communication when language barriers arise?',
-    questionJa: '言葉の壁がある場合、どのように正確なコミュニケーションをとりますか？ (Kotoba no kabe ga aru baai, dono you ni seikaku na komyunikeeshon o torimasu ka?)',
-    questionSi: 'භාෂා ගැටළු හෝ තේරුම් ගැනීමේ අපහසුතා ඇති වූ විට ඔබ නිවැරදි සන්නිවේදනයක් පවත්වා ගන්නේ කෙසේද?',
-    sampleAnswerEn: 'I speak slowly and clearly, avoid confusing slang, and use simple, standard vocabulary. I frequently confirm understanding by politely paraphrasing key points, using written notes or diagrams where helpful, and never pretending to understand when I am uncertain.',
-    sampleAnswerJa: '専門用語や早口を避け、丁寧かつ分かりやすい表現を用います。また、重要な指示は復唱して確認し、メモや図表を活用して双方の認識にズレがないよう努めます。',
-    explanationSi: 'නොතේරුණු දෙයක් තේරුණා සේ හිස වැනීමෙන් වළකින්න. සන්සුන්ව පැහැදිලි කරගැනීම (clarification), නැවත තහවුරු කරගැනීම (confirming) සහ ලිඛිත සටහන් භාවිතය ඉතා අගය කෙරේ.',
-    personalizationTip: 'Never be afraid to say: "Could you please repeat that slowly? I want to make sure I carry out your instructions accurately."'
-  },
-
-  // 6. Career Preparation FAQs
+  // 4. Workplace Communication & Compliance
   {
     id: 'faq-c0',
     category: 'Career Preparation FAQs',
     questionEn: 'Are these career materials educational resources, and does GlobeLink sell job placements?',
     questionJa: 'このキャリア資料は教育・準備リソースですか？またGlobeLinkは雇用の斡旋販売を行っていますか？ (Kono kyaria shiryou wa kyouiku/junbi risousu desu ka? Mata GlobeLink wa koyou no assen hanbai o okonatte imasu ka?)',
     questionSi: 'මෙම සම්මුඛ පරීක්ෂණ මාර්ගෝපදේශ හුදෙක් අධ්‍යාපනික සම්පත්ද? GlobeLink ආයතනය රැකියා අවස්ථා මුදලට විකුණනු ලබන්නේද?',
+    questionTa: 'இவை கல்விசார் தயாரிப்பு வளங்களா? GlobeLink வேலை வாய்ப்புகளை விற்பனை செய்கிறதா?',
     sampleAnswerEn: 'These interview questions, practice tools, and CV guidelines are strictly educational preparation resources designed to equip candidates with authentic communication skills and international confidence. GlobeLink Education and Migration Consultants is an educational advisory and migration consultancy; we do not sell job placements, we do not operate as an employment agency, and we never make false promises of guaranteed hiring. All employment decisions are made independently by foreign employers based solely on candidate merit and authentic qualifications.',
     sampleAnswerJa: '当資料および模擬面接ツールは、求職者が自らのスキル・語学力・ビジネスマナーを向上させるための純粋な教育・準備リソースです。GlobeLinkは就職の斡旋販売を行う機関ではなく、雇用の保証は一切いたしません。採用の可否は、各受入企業・雇用主が候補者の能力に基づき公正に判断します。',
-    explanationSi: 'මෙම සියලුම ප්‍රශ්නෝත්තර සහ පුහුණු මෙවලම් හුදෙක් අපේක්ෂකයන්ගේ කුසලතා, භාෂා හැකියාව සහ වෘත්තීය නිපුණතාව ඉහළ නැංවීමේ අධ්‍යාපනික සම්පත් පමණි. GlobeLink ආයතනය කිසිදු රැකියා අවස්ථාවක් මුදලට විකිණීම හෝ ව්‍යාජ රැකියා පොරොන්දු ලබාදීම සිදු නොකරයි. විදේශීය සේවායෝජකයන් විසින් අපේක්ෂකයාගේ සැබෑ දක්ෂතාවය මත පමණක් සෘජු බඳවාගැනීම් සිදුකරනු ලැබේ.',
+    sampleAnswerSi: 'මෙම සියලුම ප්‍රශ්නෝත්තර සහ පුහුණු මෙවලම් හුදෙක් අපේක්ෂකයන්ගේ කුසලතා, භාෂා හැකියාව සහ වෘත්තීය නිපුණතාව ඉහළ නැංවීමේ අධ්‍යාපනික සම්පත් පමණි. GlobeLink ආයතනය කිසිදු රැකියා අවස්ථාවක් මුදලට විකිණීම හෝ ව්‍යාජ රැකියා පොරොන්දු ලබාදීම සිදු නොකරයි. විදේශීය සේවායෝජකයන් විසින් අපේක්ෂකයාගේ සැබෑ දක්ෂතාවය මත පමණක් සෘජු බඳවාගැනීම් සිදුකරනු ලැබේ.',
+    sampleAnswerTa: 'இவை அனைத்தும் தேர்வாளர்களின் மொழி மற்றும் நேர்காணல் திறன்களை வளர்க்கும் கல்வி வளங்கள் மட்டுமே. GlobeLink எந்தவொரு வேலை வாய்ப்புகளையும் விற்பனை செய்வதில்லை அல்லது போலி வேலை வாக்குறுதிகளை வழங்குவதில்லை. வெளிநாட்டு முதலாளிகளே திறமையின் அடிப்படையில் நேரடியாக தேர்வு செய்கின்றனர்.',
+    explanationSi: 'මෙම සියලුම ප්‍රශ්නෝත්තර හුදෙක් අධ්‍යාපනික සූදානම සඳහා පමණි. GlobeLink නීත්‍යානුකූල නොවන රැකියා විකිණීම් හෝ ව්‍යාජ පොරොන්දු ලබා නොදේ.',
+    explanationTa: 'இவை கல்விசார் வளங்கள் மட்டுமே. வெளிநாட்டு வேலைகளுக்கு உத்தரவாதம் அளிக்கப்பட மாட்டாது.',
+    explanationJa: '当教材は純粋な教育用ツールであり、不当な斡旋や採用保証を一切排除した合法的コンサルティングの証明です。',
+    explanationEn: 'GlobeLink provides transparent educational and ethical advisory services only.',
     personalizationTip: 'Honest and authentic preparation always produces the highest success rate. Focus on showcasing your real skills truthfully.'
-  },
-  {
-    id: 'faq-c1',
-    category: 'Career Preparation FAQs',
-    questionEn: 'How should I structure my international CV for Gulf and Japanese employers?',
-    questionJa: '海外企業向けの履歴書・職務経歴書はどのように作成すべきですか？ (Kaigai kigyou muke no rirekisho wa dono you ni sakusei subeki desu ka?)',
-    questionSi: 'මැදපෙරදිග (Gulf) සහ ජපන් ආයතන සඳහා CV පත්‍රිකාවක් සකස් කරගත යුත්තේ කෙසේද?',
-    sampleAnswerEn: 'For Gulf employers (Dubai/UAE/Maldives), use a clean 2-page reverse-chronological format highlighting quantifiable duties, relevant technical tools, and verified certifications. For Japan, prepare both an English format and the traditional Japanese Rirekisho with an authentic photo and accurate educational timelines.',
-    explanationSi: 'ගල්ෆ් රටවල් සඳහා කෙටි, සෘජු, ප්‍රතිඵල පෙන්වන (ATS compliant) CV පත්‍රිකාවක් ද, ජපානය සඳහා ජපන් ආකෘතියේ රිරෙකිෂෝ (Rirekisho) පත්‍රිකාවක් ද පිළියෙල කිරීම සුදුසුය.',
-    personalizationTip: 'GlobeLink Career Partner consultants provide 1-on-1 resume transformation according to target destination standards.'
-  },
-  {
-    id: 'faq-c2',
-    category: 'Career Preparation FAQs',
-    questionEn: 'What are the essential tips for passing an international virtual video interview?',
-    questionJa: 'オンライン面接（Web面接）を成功させるための重要ポイントは何ですか？ (Onrain mensetsu o seikou saseru tame no juuyou pointo wa nan desu ka?)',
-    questionSi: 'අන්තර්ජාලය ඔස්සේ පවත්වන වීඩියෝ සම්මුඛ පරීක්ෂණයකට (Online Interview) සාර්ථකව මුහුණ දීමට වැදගත් උපදෙස් මොනවාද?',
-    sampleAnswerEn: 'Test your camera, microphone, and internet connection 30 minutes in advance. Dress in full professional corporate attire. Sit in a quiet, well-lit room with a clean background. Look directly at the camera lens to maintain natural eye contact, speak with steady pace, and keep a notepad ready.',
-    explanationSi: 'කල්තියා තාක්ෂණික පරීක්ෂාව සිදුකිරීම, නිහඬ ආලෝකමත් ස්ථානයක් තෝරාගැනීම, විධිමත් ඇඳුමෙන් සැරසීම සහ කැමරාව දෙස බලා කතා කිරීම ඉතා වැදගත් වේ.',
-    personalizationTip: 'Conduct a mock call with a friend or GlobeLink mentor prior to your official interview to calibrate audio levels.'
   }
 ];
 

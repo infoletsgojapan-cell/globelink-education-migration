@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { PageId } from './types';
+import { LanguageProvider } from './contexts/LanguageContext';
 import { Navbar } from './components/common/Navbar';
 import { Footer } from './components/common/Footer';
 import { FloatingWhatsApp } from './components/common/FloatingWhatsApp';
@@ -12,6 +13,7 @@ import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
 import { EducationConsultancyPage } from './pages/EducationConsultancyPage';
 import { LetsGoJapanPage } from './pages/LetsGoJapanPage';
+import { JapaneseExamsPage } from './pages/JapaneseExamsPage';
 import { JapaneseCoursesPage } from './pages/JapaneseCoursesPage';
 import { CareerPartnerPage } from './pages/CareerPartnerPage';
 import { InternationalCareersPage } from './pages/InternationalCareersPage';
@@ -25,6 +27,7 @@ const PAGE_PATHS: Record<PageId, string> = {
   'about': '/about',
   'education-consultancy': '/education-consultancy',
   'lets-go-japan': '/lets-go-japan',
+  'japanese-exams': '/japanese-exams',
   'japanese-language-courses': '/japanese-language-courses',
   'career-partner': '/career-partner',
   'career-preparation': '/career-preparation',
@@ -40,6 +43,7 @@ const PATH_TO_PAGE: Record<string, PageId> = {
   '/about': 'about',
   '/education-consultancy': 'education-consultancy',
   '/lets-go-japan': 'lets-go-japan',
+  '/japanese-exams': 'japanese-exams',
   '/japanese-language-courses': 'japanese-language-courses',
   '/career-partner': 'career-partner',
   '/career-preparation': 'career-preparation',
@@ -104,6 +108,8 @@ export default function App() {
         return <EducationConsultancyPage onNavigate={handleNavigate} onOpenSupabaseModal={() => setSupabaseModalOpen(true)} />;
       case 'lets-go-japan':
         return <LetsGoJapanPage onNavigate={handleNavigate} onOpenSupabaseModal={() => setSupabaseModalOpen(true)} />;
+      case 'japanese-exams':
+        return <JapaneseExamsPage onNavigate={handleNavigate} onOpenSupabaseModal={() => setSupabaseModalOpen(true)} />;
       case 'japanese-language-courses':
         return <JapaneseCoursesPage onNavigate={handleNavigate} onOpenSupabaseModal={() => setSupabaseModalOpen(true)} />;
       case 'career-partner':
@@ -125,87 +131,89 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 font-sans text-slate-900 selection:bg-rose-500 selection:text-white">
-      {/* Sticky Responsive Navbar */}
-      <Navbar
-        currentPage={currentPage}
-        onNavigate={handleNavigate}
-        onOpenConsultationModal={() => setConsultationModalOpen(true)}
-      />
+    <LanguageProvider>
+      <div className="min-h-screen flex flex-col bg-slate-50 font-sans text-slate-900 selection:bg-rose-500 selection:text-white">
+        {/* Sticky Responsive Navbar */}
+        <Navbar
+          currentPage={currentPage}
+          onNavigate={handleNavigate}
+          onOpenConsultationModal={() => setConsultationModalOpen(true)}
+        />
 
-      {/* Main Page Content */}
-      <main className="flex-1">
-        {renderActivePage()}
-      </main>
+        {/* Main Page Content */}
+        <main className="flex-1">
+          {renderActivePage()}
+        </main>
 
-      {/* Floating WhatsApp Quick Action */}
-      <FloatingWhatsApp />
+        {/* Floating WhatsApp Quick Action */}
+        <FloatingWhatsApp />
 
-      {/* Footer */}
-      <Footer
-        onNavigate={handleNavigate}
-        onOpenSupabaseModal={() => setSupabaseModalOpen(true)}
-      />
+        {/* Footer */}
+        <Footer
+          onNavigate={handleNavigate}
+          onOpenSupabaseModal={() => setSupabaseModalOpen(true)}
+        />
 
-      {/* Supabase Integration Setup Modal */}
-      <SupabaseSetupModal
-        isOpen={supabaseModalOpen}
-        onClose={() => setSupabaseModalOpen(false)}
-      />
+        {/* Supabase Integration Setup Modal */}
+        <SupabaseSetupModal
+          isOpen={supabaseModalOpen}
+          onClose={() => setSupabaseModalOpen(false)}
+        />
 
-      {/* Quick Consultation Modal */}
-      {consultationModalOpen && (
-        <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/75 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-xl w-full border border-slate-200 overflow-hidden animate-in fade-in zoom-in-95 duration-200 relative">
-            <button
-              onClick={() => setConsultationModalOpen(false)}
-              className="absolute top-4 right-4 z-10 text-slate-400 hover:text-slate-800 p-1.5 rounded-full bg-slate-100 hover:bg-slate-200 transition-colors"
-              aria-label="Close consultation modal"
-            >
-              <X className="w-5 h-5" />
-            </button>
-            <div className="p-2 sm:p-4 max-h-[85vh] overflow-y-auto">
-              <InquiryForm
-                id="modal-inquiry"
-                title="Book an Advisory Session"
-                subtitle="Provide your contact details. A GlobeLink consultant will connect with you via WhatsApp or phone."
-                onOpenSupabaseModal={() => {
-                  setConsultationModalOpen(false);
-                  setSupabaseModalOpen(true);
-                }}
-              />
+        {/* Quick Consultation Modal */}
+        {consultationModalOpen && (
+          <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/75 backdrop-blur-xs flex items-center justify-center p-4">
+            <div className="bg-white rounded-2xl shadow-2xl max-w-xl w-full border border-slate-200 overflow-hidden animate-in fade-in zoom-in-95 duration-200 relative">
+              <button
+                onClick={() => setConsultationModalOpen(false)}
+                className="absolute top-4 right-4 z-10 text-slate-400 hover:text-slate-800 p-1.5 rounded-full bg-slate-100 hover:bg-slate-200 transition-colors"
+                aria-label="Close consultation modal"
+              >
+                <X className="w-5 h-5" />
+              </button>
+              <div className="p-2 sm:p-4 max-h-[85vh] overflow-y-auto">
+                <InquiryForm
+                  id="modal-inquiry"
+                  title="Book an Advisory Session"
+                  subtitle="Provide your contact details. A GlobeLink consultant will connect with you via WhatsApp or phone."
+                  onOpenSupabaseModal={() => {
+                    setConsultationModalOpen(false);
+                    setSupabaseModalOpen(true);
+                  }}
+                />
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* Cookie / Privacy Consent Notice (Consent-aware tracking) */}
-      {!cookieConsentDismissed && (
-        <aside
-          aria-label="Cookie and Privacy Consent"
-          className="fixed bottom-4 left-4 z-40 max-w-md bg-slate-900/95 backdrop-blur-md text-slate-300 text-xs p-4 rounded-xl shadow-2xl border border-slate-800 flex items-start gap-3 animate-in fade-in slide-in-from-bottom-3 duration-300"
-        >
-          <ShieldCheck className="w-5 h-5 text-sky-400 shrink-0 mt-0.5" />
-          <div className="space-y-1.5 flex-1">
-            <p className="font-semibold text-white">Privacy &amp; Transparent Advisory</p>
-            <p className="text-[11px] leading-relaxed text-slate-400">
-              We use essential browser storage for navigation performance and consultation inquiries in accordance with our{' '}
-              <button
-                onClick={() => handleNavigate('privacy-policy')}
-                className="text-sky-400 underline hover:text-white"
-              >
-                Privacy Policy
-              </button>.
-            </p>
-          </div>
-          <button
-            onClick={handleDismissCookieConsent}
-            className="px-3 py-1.5 bg-sky-600 hover:bg-sky-500 text-white rounded-lg font-semibold text-[11px] shrink-0 transition-colors"
+        {/* Cookie / Privacy Consent Notice (Consent-aware tracking) */}
+        {!cookieConsentDismissed && (
+          <aside
+            aria-label="Cookie and Privacy Consent"
+            className="fixed bottom-4 left-4 z-40 max-w-md bg-slate-900/95 backdrop-blur-md text-slate-300 text-xs p-4 rounded-xl shadow-2xl border border-slate-800 flex items-start gap-3 animate-in fade-in slide-in-from-bottom-3 duration-300"
           >
-            Acknowledge
-          </button>
-        </aside>
-      )}
-    </div>
+            <ShieldCheck className="w-5 h-5 text-sky-400 shrink-0 mt-0.5" />
+            <div className="space-y-1.5 flex-1">
+              <p className="font-semibold text-white">Privacy &amp; Transparent Advisory</p>
+              <p className="text-[11px] leading-relaxed text-slate-400">
+                We use essential browser storage for navigation performance and consultation inquiries in accordance with our{' '}
+                <button
+                  onClick={() => handleNavigate('privacy-policy')}
+                  className="text-sky-400 underline hover:text-white"
+                >
+                  Privacy Policy
+                </button>.
+              </p>
+            </div>
+            <button
+              onClick={handleDismissCookieConsent}
+              className="px-3 py-1.5 bg-sky-600 hover:bg-sky-500 text-white rounded-lg font-semibold text-[11px] shrink-0 transition-colors"
+            >
+              Acknowledge
+            </button>
+          </aside>
+        )}
+      </div>
+    </LanguageProvider>
   );
 }

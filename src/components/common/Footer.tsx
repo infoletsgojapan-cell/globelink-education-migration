@@ -196,6 +196,15 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenSupabaseModal 
               </li>
               <li>
                 <button
+                  onClick={() => onNavigate('japanese-exams')}
+                  className="hover:text-white transition-colors flex items-center gap-1.5 text-emerald-400 font-semibold"
+                >
+                  <BookOpen className="w-3.5 h-3.5" />
+                  Japanese Exams &amp; Registration (EJU / JLPT)
+                </button>
+              </li>
+              <li>
+                <button
                   onClick={() => onNavigate('japanese-language-courses')}
                   className="hover:text-white transition-colors"
                 >
@@ -216,6 +225,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenSupabaseModal 
                   className="hover:text-white transition-colors"
                 >
                   JLPT N3 Fluency Training
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('japanese-exams')}
+                  className="hover:text-white transition-colors text-slate-400"
+                >
+                  Prometric SSW Skill Assessments
                 </button>
               </li>
               <li>

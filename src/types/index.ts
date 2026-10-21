@@ -3,6 +3,7 @@ export type PageId =
   | 'about'
   | 'education-consultancy'
   | 'lets-go-japan'
+  | 'japanese-exams'
   | 'japanese-language-courses'
   | 'career-partner'
   | 'career-preparation'
@@ -11,6 +12,8 @@ export type PageId =
   | 'contact'
   | 'privacy-policy'
   | 'terms-and-conditions';
+
+export type SupportedLanguage = 'en' | 'si' | 'ta' | 'ja';
 
 export interface JapaneseCourse {
   id: string;
@@ -58,9 +61,15 @@ export interface InquiryFormData {
 
 export interface FAQItem {
   id: string;
-  category: 'General' | 'Let\'s Go Japan' | 'Career Partner' | 'Education' | 'Visa & Compliance';
+  category: 'General' | 'Let\'s Go Japan' | 'Career Partner' | 'Education' | 'Visa & Compliance' | 'Exams & EJU';
   question: string;
   answer: string;
+  questionSi?: string;
+  answerSi?: string;
+  questionTa?: string;
+  answerTa?: string;
+  questionJa?: string;
+  answerJa?: string;
 }
 
 export type InterviewCategory =
@@ -77,8 +86,103 @@ export interface InterviewQuestion {
   questionEn: string;
   questionJa?: string;
   questionSi?: string;
+  questionTa?: string;
   sampleAnswerEn: string;
   sampleAnswerJa?: string;
+  sampleAnswerSi?: string;
+  sampleAnswerTa?: string;
   explanationSi: string;
+  explanationEn?: string;
+  explanationJa?: string;
+  explanationTa?: string;
   personalizationTip: string;
+  personalizationTipSi?: string;
+  personalizationTipTa?: string;
+  personalizationTipJa?: string;
+}
+
+export type ExamCategory =
+  | 'JLPT'
+  | 'EJU'
+  | 'NAT-TEST'
+  | 'JLCT'
+  | 'JFT-Basic'
+  | 'SSW Skills Assessment';
+
+export interface ExamResourceLink {
+  label: string;
+  url: string;
+  purpose: 'official_info' | 'registration_guide' | 'university_entrance' | 'skill_test' | 'exam_portal';
+}
+
+export interface ExamResource {
+  id: string;
+  name: string;
+  acronym: string;
+  japaneseName: string;
+  category: ExamCategory;
+  shortExplanation: string;
+  levelsOrSectors: string[];
+  globeLinkPreparation: string;
+  officialReferenceLinks: ExamResourceLink[];
+  registrationLink?: ExamResourceLink;
+  whatsappMessage: string;
+  badgeLabel?: string;
+  eligibilityNotes?: string;
+  complianceDisclaimer?: string;
+}
+
+export type AnnouncementStatus =
+  | 'Upcoming'
+  | 'Registration Open'
+  | 'Closing Soon'
+  | 'Completed'
+  | 'Postponed';
+
+export type AnnouncementCategory =
+  | 'Exam Dates'
+  | 'Registration Opens'
+  | 'Deadlines'
+  | 'Free Seminars'
+  | 'Workshops'
+  | 'University Prep'
+  | 'New Courses'
+  | 'Vacancies';
+
+export interface AnnouncementItem {
+  id: string;
+  title: string;
+  titleSi?: string;
+  titleTa?: string;
+  titleJa?: string;
+  category: AnnouncementCategory;
+  description: string;
+  descriptionSi?: string;
+  descriptionTa?: string;
+  descriptionJa?: string;
+  eventDate?: string;
+  registrationOpens?: string;
+  deadline?: string;
+  format: 'Online' | 'Offline' | 'Hybrid';
+  officialUrl?: string;
+  status: AnnouncementStatus;
+  isPublished: boolean;
+  createdAt: string;
+}
+
+export interface CareerVacancy {
+  id: string;
+  title: string;
+  employerName?: string;
+  country: string;
+  sector: string;
+  description: string;
+  publishedDate: string;
+  deadline: string;
+  eligibilityRequirements: string[];
+  languageRequirements: string;
+  applicationUrl?: string;
+  contactMethod: string;
+  verificationLabel: string;
+  isVerified: boolean;
 }

@@ -93,6 +93,25 @@ export const LetsGoJapanPage: React.FC<LetsGoJapanPageProps> = ({
         </div>
       </section>
 
+      {/* Japanese Examination & University Entrance Resource Centre Announcement Bar */}
+      <section className="bg-gradient-to-r from-slate-900 via-rose-950 to-slate-900 text-white py-4 px-4 border-b border-rose-900/60">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+          <div className="flex items-center gap-2.5">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+            <p className="text-slate-200">
+              <strong className="text-white">Japanese Exams &amp; Registration Centre:</strong> Official guides for JLPT N5-N1, EJU University Admission, Prometric SSW Agriculture, NAT-TEST &amp; JFT-Basic.
+            </p>
+          </div>
+          <button
+            onClick={() => onNavigate('japanese-exams')}
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs shrink-0 transition-colors shadow-2xs"
+          >
+            <span>View Exam Resources</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      </section>
+
       {/* Conflicting Information Notice Banner (Flagged for client verification as requested in prompt) */}
       <section className="bg-amber-50 border-b border-amber-200 py-3 px-4 text-xs text-amber-900">
         <div className="max-w-7xl mx-auto flex items-start sm:items-center gap-2.5">

@@ -284,10 +284,17 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenSupabaseMo
                 Structured language preparation for JLPT N5, N4, N3, JFT-Basic, and NAT-TEST with flexible online schedules and live interactive sessions.
               </p>
             </div>
-            <div className="mt-4 md:mt-0">
+            <div className="mt-4 md:mt-0 flex flex-wrap items-center gap-3">
+              <button
+                onClick={() => onNavigate('japanese-exams')}
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs transition-colors shadow-sm"
+              >
+                <span>Japanese Exams &amp; EJU Guide</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
               <button
                 onClick={() => onNavigate('japanese-language-courses')}
-                className="inline-flex items-center gap-2 text-xs font-semibold text-sky-400 hover:text-sky-300 transition-colors"
+                className="inline-flex items-center gap-2 text-xs font-semibold text-sky-400 hover:text-sky-300 transition-colors py-1.5"
               >
                 <span>View All 8 Courses &amp; Syllabi</span>
                 <ArrowRight className="w-4 h-4" />
