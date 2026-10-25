@@ -8,33 +8,48 @@ import {
   MapPin,
   Phone,
   Mail,
-  ArrowRight
+  ArrowRight,
+  Compass,
+  FileCheck2
 } from 'lucide-react';
 import { PageId } from '../types';
 import { COMPANY_INFO } from '../data/company';
 import { SEOHead } from '../components/common/SEOHead';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { DisclaimerBanner } from '../components/common/DisclaimerBanner';
+import { useLanguage } from '../contexts/LanguageContext';
+import { TRANSLATIONS } from '../data/translations';
 
 interface AboutPageProps {
   onNavigate: (page: PageId) => void;
 }
 
 export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
+  const { language } = useLanguage();
+  const t = TRANSLATIONS[language];
+  const tAbout = t.about;
+
+  const coreValues = [
+    { title: tAbout.val1Title, desc: tAbout.val1Desc, icon: ShieldCheck, color: 'text-emerald-600 bg-emerald-50' },
+    { title: tAbout.val2Title, desc: tAbout.val2Desc, icon: Award, color: 'text-sky-600 bg-sky-50' },
+    { title: tAbout.val3Title, desc: tAbout.val3Desc, icon: Target, color: 'text-rose-600 bg-rose-50' },
+    { title: tAbout.val4Title, desc: tAbout.val4Desc, icon: Users2, color: 'text-amber-600 bg-amber-50' },
+  ];
+
   return (
     <div className="flex flex-col min-h-screen bg-slate-50">
       <SEOHead
-        title="About Us | GlobeLink Education & Migration Consultants"
+        title={`${tAbout.pageTitle} | GlobeLink`}
         description="Learn about GlobeLink Education & Migration Consultants (Globe Link Edu), our ethical consulting philosophy, Let's Go Japan program, and international pathways."
         canonicalPath="/about"
         breadcrumbs={[
           { name: 'Home', path: '/' },
-          { name: 'About Us', path: '/about' }
+          { name: tAbout.pageTitle, path: '/about' }
         ]}
       />
 
       <Breadcrumbs
-        items={[{ name: 'About Us' }]}
+        items={[{ name: tAbout.pageTitle }]}
         onNavigate={onNavigate}
       />
 
@@ -44,45 +59,58 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl">
             <span className="text-xs font-bold text-sky-400 uppercase tracking-widest mb-2 block">
-              About GlobeLink Education and Migration Consultants
+              {tAbout.kicker}
             </span>
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
-              Bridging Local Ambition with Global Opportunity
+              {tAbout.pageTitle}
             </h1>
             <p className="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed">
-              Transparent, trusted, and end-to-end guidance connecting Sri Lankan talent to international education and legitimate career pathways.
+              {tAbout.pageSubtitle}
             </p>
           </div>
         </div>
       </section>
 
-      {/* Main Content Section with Client Supplied Text */}
+      {/* Main Content Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-7 space-y-6">
               <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-                Who We Are &amp; What Drives Us
+                {tAbout.storyTitle}
               </h2>
 
-              {/* Exact Provided Content Block */}
+              {/* Exact Story Paragraphs */}
               <div className="p-6 bg-slate-50 rounded-2xl border-l-4 border-sky-600 text-slate-800 space-y-4 shadow-xs">
-                <p className="text-base sm:text-lg leading-relaxed font-medium text-slate-900">
-                  &ldquo;At GlobeLink, we turn international ambitions into achievable realities. We specialize in bridging the gap between local talent and global opportunities. Whether your goal is studying abroad or advancing your profession overseas, our mission is to provide transparent, trusted, and end-to-end guidance every step of the way.&rdquo;
+                <p className="text-base leading-relaxed font-medium text-slate-900">
+                  {tAbout.storyP1}
                 </p>
                 <p className="text-sm text-slate-700 leading-relaxed">
-                  &ldquo;While renowned for our specialized study and language programs, such as Let&apos;s Go Japan, our expertise extends beyond the classroom. We guide students and professionals exploring destinations including Japan, Dubai, the UAE and the Maldives. With GlobeLink, you gain a dedicated team committed to ethical consulting, compliance and your long-term success.&rdquo;
+                  {tAbout.storyP2}
                 </p>
               </div>
 
-              {/* Detailed Operational Context */}
-              <div className="space-y-4 text-sm text-slate-700 leading-relaxed pt-2">
-                <p>
-                  Established in Nittambuwa, Sri Lanka, GlobeLink Education and Migration Consultants was founded on a fundamental conviction: candidate success requires ethical clarity rather than false shortcuts. Many overseas candidates face misinformation and inflated promises; our approach provides verifiable factual requirements for every program.
-                </p>
-                <p>
-                  Through our specialized <strong>Let&apos;s Go Japan</strong> program, we combine rigorous Japanese Language Proficiency Test (JLPT) training, JFT-Basic preparation, and cultural readiness with personalized student visa and Specified Skilled Worker (SSW) guidance. In addition, our <strong>Your Career Partner Program</strong> assists qualified professionals targeting Dubai, the UAE, and the Maldives with CV modernization, employer benchmark matching, and authentication support.
-                </p>
+              {/* Mission & Vision Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                <div className="p-6 bg-sky-50/60 rounded-2xl border border-sky-100 space-y-2">
+                  <div className="w-10 h-10 rounded-xl bg-sky-600 text-white flex items-center justify-center">
+                    <Target className="w-5 h-5" />
+                  </div>
+                  <h3 className="font-bold text-slate-900 text-base">{tAbout.missionTitle}</h3>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    {tAbout.missionDesc}
+                  </p>
+                </div>
+
+                <div className="p-6 bg-emerald-50/60 rounded-2xl border border-emerald-100 space-y-2">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center">
+                    <Compass className="w-5 h-5" />
+                  </div>
+                  <h3 className="font-bold text-slate-900 text-base">{tAbout.visionTitle}</h3>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    {tAbout.visionDesc}
+                  </p>
+                </div>
               </div>
 
               <DisclaimerBanner />
@@ -90,50 +118,36 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
 
             {/* Side Highlights & Verification Box */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="bg-slate-900 text-white rounded-2xl p-6 shadow-xl border border-slate-800">
-                <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                  <ShieldCheck className="w-5 h-5 text-sky-400" />
-                  Our Core Pillars of Practice
+              <div className="bg-slate-900 text-white rounded-2xl p-6 shadow-xl border border-slate-800 space-y-4">
+                <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                  <FileCheck2 className="w-5 h-5 text-sky-400" />
+                  {tAbout.complianceTitle}
                 </h3>
-
-                <ul className="space-y-4 text-xs text-slate-300">
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <div>
-                      <strong className="text-white block text-sm">Integrity &amp; Realistic Expectations</strong>
-                      We never guarantee visa outcomes or job offers. We present candid eligibility evaluations before any commitments.
-                    </div>
-                  </li>
-
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="w-4 h-4 text-sky-400 shrink-0 mt-0.5" />
-                    <div>
-                      <strong className="text-white block text-sm">Specialized Japanese Pedagogy</strong>
-                      Our Let&apos;s Go Japan instructors teach through structured interactive curriculums, mock exams, and real-world audio drills.
-                    </div>
-                  </li>
-
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
-                    <div>
-                      <strong className="text-white block text-sm">Regulatory Compliance</strong>
-                      Strict adherence to Sri Lankan laws and target host nation immigration codes (Japan Immigration Services Agency, UAE MOHRE, etc.).
-                    </div>
-                  </li>
-
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-                    <div>
-                      <strong className="text-white block text-sm">Lifelong Mentorship</strong>
-                      From your first N5 Hiragana character or CV draft to your safe arrival and airport transition.
-                    </div>
-                  </li>
-                </ul>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  {tAbout.complianceDesc}
+                </p>
+                <div className="p-3 bg-slate-800/80 rounded-xl border border-slate-700 text-xs text-slate-300 space-y-1.5">
+                  <div className="flex items-center gap-2 text-white font-semibold">
+                    <CheckCircle className="w-4 h-4 text-emerald-400" />
+                    <span>{t.home.why1Title}</span>
+                  </div>
+                  <p className="text-[11px] text-slate-400">
+                    {t.home.why1Desc}
+                  </p>
+                </div>
               </div>
 
               {/* Office & Direct Contact Card */}
               <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs space-y-3">
-                <h4 className="font-bold text-slate-900 text-sm">Visit or Contact Our Office</h4>
+                <h4 className="font-bold text-slate-900 text-sm">
+                  {language === 'ja'
+                    ? '公式オフィス・相談窓口'
+                    : language === 'si'
+                    ? 'නිට්ටඹුව කාර්යාලය සහ සම්බන්ධතා'
+                    : language === 'ta'
+                    ? 'அலுவலகம் மற்றும் தொடர்பு தகவல்'
+                    : 'Visit Our Nittambuwa Office'}
+                </h4>
                 <div className="text-xs text-slate-600 space-y-2">
                   <div className="flex items-start gap-2">
                     <MapPin className="w-4 h-4 text-sky-600 shrink-0 mt-0.5" />
@@ -156,9 +170,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                 <div className="pt-2">
                   <button
                     onClick={() => onNavigate('contact')}
-                    className="w-full py-2.5 px-4 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-semibold text-xs transition-colors flex items-center justify-center gap-1.5"
+                    className="w-full py-2.5 px-4 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-semibold text-xs transition-colors flex items-center justify-center gap-1.5 shadow-2xs"
                   >
-                    <span>Schedule an In-Person Consultation</span>
+                    <span>{t.nav.bookConsultation}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
@@ -172,44 +186,31 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
       <section className="py-16 bg-slate-100 border-t border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <h3 className="text-2xl font-extrabold text-slate-900 tracking-tight">
-              Ethical Principles Governing Our Consulting
+            <span className="text-xs font-bold text-sky-800 uppercase tracking-widest block mb-1">
+              {tAbout.kicker}
+            </span>
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+              {tAbout.valuesTitle}
             </h3>
-            <p className="mt-2 text-xs sm:text-sm text-slate-600">
-              Clear commitments ensuring every candidate receives fair, transparent, and accurate guidance.
-            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white p-6 rounded-2xl border border-slate-200">
-              <div className="w-10 h-10 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center mb-3">
-                <Target className="w-5 h-5" />
-              </div>
-              <h4 className="font-bold text-slate-900 text-base mb-1.5">No Unverified Claims</h4>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                We never claim institutional partnerships, accreditation, or government authorization unless explicitly verified for the specific program.
-              </p>
-            </div>
-
-            <div className="bg-white p-6 rounded-2xl border border-slate-200">
-              <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center mb-3">
-                <Award className="w-5 h-5" />
-              </div>
-              <h4 className="font-bold text-slate-900 text-base mb-1.5">Transparent Fee Structure</h4>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Every service fee and course tuition is openly communicated in advance. We do not engage in unexpected surcharges or hidden costs.
-              </p>
-            </div>
-
-            <div className="bg-white p-6 rounded-2xl border border-slate-200">
-              <div className="w-10 h-10 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center mb-3">
-                <Users2 className="w-5 h-5" />
-              </div>
-              <h4 className="font-bold text-slate-900 text-base mb-1.5">Candidate-Centric Guidance</h4>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                We match candidates with pathways suitable for their genuine profile and career trajectory, rather than pushing unsuitable routes.
-              </p>
-            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {coreValues.map((val, idx) => {
+              const IconComp = val.icon;
+              return (
+                <div key={idx} className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between">
+                  <div className="space-y-3">
+                    <div className={`w-10 h-10 rounded-xl ${val.color} flex items-center justify-center`}>
+                      <IconComp className="w-5 h-5" />
+                    </div>
+                    <h4 className="font-bold text-slate-900 text-base">{val.title}</h4>
+                    <p className="text-xs text-slate-600 leading-relaxed">
+                      {val.desc}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

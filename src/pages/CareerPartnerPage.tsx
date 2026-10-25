@@ -1,30 +1,22 @@
 import React from 'react';
 import {
   Briefcase,
-  FileCheck2,
   CheckCircle,
   ShieldAlert,
-  Globe2,
   MessageCircle,
-  CalendarCheck,
-  Compass,
-  ArrowRight,
-  Sparkles,
   BookOpen,
-  GraduationCap,
-  Users2,
-  FileText,
-  Clock,
-  Layers
+  ArrowRight
 } from 'lucide-react';
 import { PageId } from '../types';
 import { COMPANY_INFO } from '../data/company';
-import { CAREER_GUIDANCE_MODULES } from '../data/interviewQuestions';
 import { SEOHead } from '../components/common/SEOHead';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { InquiryForm } from '../components/forms/InquiryForm';
 import { DisclaimerBanner } from '../components/common/DisclaimerBanner';
 import { InterviewPracticeLibrary } from '../components/career/InterviewPracticeLibrary';
+import { useLanguage } from '../contexts/LanguageContext';
+import { TRANSLATIONS } from '../data/translations';
+import { getLocalizedCareerModules } from '../utils/localizedContent';
 
 interface CareerPartnerPageProps {
   onNavigate: (page: PageId) => void;
@@ -35,24 +27,35 @@ export const CareerPartnerPage: React.FC<CareerPartnerPageProps> = ({
   onNavigate,
   onOpenSupabaseModal
 }) => {
+  const { language } = useLanguage();
+  const t = TRANSLATIONS[language];
+  const tCareer = t.careerPartner;
+  const modules = getLocalizedCareerModules(language);
+
   const careerGuidanceWhatsAppUrl = `${COMPANY_INFO.whatsappUrl}?text=${encodeURIComponent(
-    'Hello GlobeLink, I would like to ask about the GlobeLink Career Partner Program and career guidance.'
+    language === 'ja'
+      ? 'GlobeLink Career Partner プログラムおよびキャリア相談についてお伺いします。'
+      : language === 'si'
+      ? 'GlobeLink Career Partner වැඩසටහන සහ වෘත්තීය මඟපෙන්වීම පිළිබඳව විමසීමට කැමැත්තෙමි.'
+      : language === 'ta'
+      ? 'GlobeLink Career Partner திட்டம் மற்றும் தொழில் வழிகாட்டல் பற்றி அறிய விரும்புகிறேன்.'
+      : 'Hello GlobeLink, I would like to ask about the GlobeLink Career Partner Program and career guidance.'
   )}`;
 
   return (
     <div className="flex flex-col min-h-screen bg-slate-50">
       <SEOHead
-        title="GlobeLink Career Partner Program | Career Preparation & Interview Library"
-        description="Build Your Future. Expand Your Boundaries. Professional career preparation, CV and resume tips, and searchable interview questions with Sinhala and Japanese translations."
+        title={tCareer.pageTitle}
+        description={tCareer.pageSubtitle}
         canonicalPath="/career-partner"
         breadcrumbs={[
-          { name: 'Home', path: '/' },
-          { name: 'Career Preparation & Partner Program', path: '/career-partner' }
+          { name: t.nav.home, path: '/' },
+          { name: tCareer.pageTitle, path: '/career-partner' }
         ]}
       />
 
       <Breadcrumbs
-        items={[{ name: 'Career Preparation' }]}
+        items={[{ name: tCareer.pageTitle }]}
         onNavigate={onNavigate}
       />
 
@@ -63,16 +66,21 @@ export const CareerPartnerPage: React.FC<CareerPartnerPageProps> = ({
           <div className="max-w-3xl space-y-3">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-sky-950/80 border border-sky-800/80 rounded-full text-xs font-bold text-sky-400">
               <span className="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
-              <span>GlobeLink Career Partner Program</span>
+              <span>{tCareer.badge}</span>
             </div>
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
-              Build Your Future. <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-sky-300 to-white">
-                Expand Your Boundaries.
-              </span>
+              {language === 'ja' ? (
+                <>未来を築き、<br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-sky-300 to-white">可能性を世界へ広げる。</span></>
+              ) : language === 'si' ? (
+                <>ඔබගේ අනාගතය ගොඩනඟන්න. <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-sky-300 to-white">දැනුම හා සීමාවන් පුළුල් කරන්න.</span></>
+              ) : language === 'ta' ? (
+                <>உங்கள் எதிர்காலத்தை உருவாக்குங்கள். <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-sky-300 to-white">எல்லைகளை விரிவுபடுத்துங்கள்.</span></>
+              ) : (
+                <>Build Your Future. <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-sky-300 to-white">Expand Your Boundaries.</span></>
+              )}
             </h1>
             <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
-              Strategic career guidance, professional CV preparation, and bilingual interview readiness connecting Sri Lankan talent to international career standards.
+              {tCareer.pageSubtitle}
             </p>
 
             {/* Quick Action Buttons */}
@@ -82,7 +90,7 @@ export const CareerPartnerPage: React.FC<CareerPartnerPageProps> = ({
                 className="px-5 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs shadow-md transition-colors inline-flex items-center gap-1.5"
               >
                 <BookOpen className="w-4 h-4 text-slate-950" />
-                <span>Interview Q&amp;A Library</span>
+                <span>{language === 'ja' ? '面接質問＆模範回答ライブラリ' : language === 'si' ? 'සම්මුඛ පරීක්ෂණ Q&A පුස්තකාලය' : language === 'ta' ? 'நேர்காணல் வினா-விடை நூலகம்' : 'Interview Q&A Library'}</span>
               </a>
 
               <a
@@ -92,7 +100,7 @@ export const CareerPartnerPage: React.FC<CareerPartnerPageProps> = ({
                 className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md transition-colors inline-flex items-center gap-1.5"
               >
                 <MessageCircle className="w-4 h-4 fill-white text-emerald-600" />
-                <span>Ask About Career Guidance</span>
+                <span>{language === 'ja' ? 'WhatsAppでキャリア相談' : language === 'si' ? 'වෘත්තීය මඟපෙන්වීම විමසන්න' : language === 'ta' ? 'தொழில் வழிகாட்டல் பற்றி கேளுங்கள்' : 'Ask About Career Guidance'}</span>
               </a>
             </div>
           </div>
@@ -104,7 +112,7 @@ export const CareerPartnerPage: React.FC<CareerPartnerPageProps> = ({
         <div className="max-w-7xl mx-auto flex items-start sm:items-center gap-2.5">
           <ShieldAlert className="w-5 h-5 text-rose-400 shrink-0 mt-0.5 sm:mt-0" />
           <p className="leading-relaxed">
-            <strong>Mandatory Advisory Notice:</strong> GlobeLink Education and Migration Consultants is an independent professional consultancy. We are not an employer or staffing agency, and we do not issue work permits or make promises of guaranteed employment, salary levels, visa approvals, or permanent residency outcomes. All hiring decisions are made exclusively by independent employers, and all visas are issued solely by respective government immigration authorities.
+            <strong>{language === 'ja' ? '法令順守に関する重要事項：' : language === 'si' ? 'අනිවාර්ය නීතිමය නිවේදනය:' : language === 'ta' ? 'முக்கிய சட்ட அறிவிப்பு:' : 'Mandatory Advisory Notice:'}</strong> {tCareer.disclaimerNotice}
           </p>
         </div>
       </section>
@@ -115,28 +123,37 @@ export const CareerPartnerPage: React.FC<CareerPartnerPageProps> = ({
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
             <div className="lg:col-span-7 space-y-5">
               <span className="text-xs font-bold text-sky-800 uppercase tracking-widest block">
-                Professional International Workforce Development
+                {language === 'ja' ? '国際基準のプロフェッショナル人材育成' : language === 'si' ? 'වෘත්තීය ජාත්‍යන්තර මානව සම්පත් සංවර්ධනය' : language === 'ta' ? 'சர்வதேச பணியாளர் திறன் மேம்பாடு' : 'Professional International Workforce Development'}
               </span>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-                Stepping into the International Workforce with Strategic Readiness
+                {tCareer.overviewTitle}
               </h2>
 
               {/* Exact Provided Content */}
               <div className="p-6 bg-slate-50 rounded-2xl border-l-4 border-sky-600 text-slate-800 space-y-4 shadow-xs">
                 <p className="text-base sm:text-lg font-medium text-slate-900 leading-relaxed">
-                  &ldquo;Stepping into the international workforce requires more than just a visa—it demands a strategic partner who understands global market standards. The GlobeLink Career Partner Program supports ambitious professionals exploring legitimate overseas employment opportunities.&rdquo;
-                </p>
-                <p className="text-sm text-slate-700 leading-relaxed">
-                  &ldquo;We help candidates align their skills with employer requirements, prepare professional resumes, understand application procedures and navigate relevant documentation. Our support is tailored to each destination and candidate profile.&rdquo;
+                  {tCareer.overviewDesc}
                 </p>
               </div>
 
               <div className="space-y-3 text-xs sm:text-sm text-slate-700 leading-relaxed pt-2">
                 <p>
-                  Global recruitment standards require strict professional discipline. Candidates targeting <strong>Dubai and the UAE</strong> need clean, quantitative ATS-optimized CVs, whereas employers in <strong>Japan</strong> expect traditional dual formats (Rirekisho &amp; Shokumu-Keirekisho) along with demonstrated etiquette and the &ldquo;Hou-Ren-Sou&rdquo; communication discipline.
+                  {language === 'ja'
+                    ? 'グローバルな採用基準では厳格な職業規律が求められます。ドバイやUAE向けには定量的成果を示したATS最適化英文CVが必要であり、日本の企業では伝統的な履歴書・職務経歴書と「報連相」の徹底が期待されます。'
+                    : language === 'si'
+                    ? 'ගෝලීය බඳවාගැනීම් ප්‍රමිතීන් දැඩි වෘත්තීය විනයක් අපේක්ෂා කරයි. ඩුබායි සහ එක්සත් අරාබි එමීර් රාජ්‍යය සඳහා ATS-ප්‍රශස්ත CV අවශ්‍ය වන අතර, ජපානයේ සේවායෝජකයන් සම්ප්‍රදායික ද්විත්ව ලියකියවිලි (රිරෙකිෂෝ සහ ෂොකුමු-කෙයිරෙකිෂෝ) සහ කාර්යාලීය විනය (Hou-Ren-Sou) බලාපොරොත්තු වේ.'
+                    : language === 'ta'
+                    ? 'சர்வதேச வேலைவாய்ப்பு தரநிலைகளுக்கு தொழில்முறை ஒழுக்கம் அவசியம். துபாய்/யுஏஇ நாடுகளுக்கு ATS-உகந்த CV தேவைப்படுகிறது, அதேசமயம் ஜப்பானிய முதலாளிகள் பாரம்பரிய விண்ணப்பப் படிவங்களையும் (Rirekisho & Shokumu-Keirekisho) மற்றும் பணி ஒழுக்கத்தையும் எதிர்பார்க்கிறார்கள்.'
+                    : 'Global recruitment standards require strict professional discipline. Candidates targeting Dubai and the UAE need clean, quantitative ATS-optimized CVs, whereas employers in Japan expect traditional dual formats (Rirekisho & Shokumu-Keirekisho) along with demonstrated etiquette and the "Hou-Ren-Sou" communication discipline.'}
                 </p>
                 <p>
-                  In the <strong>Maldives</strong>, luxury resorts prioritize conversational poise, cross-cultural empathy, and guest hospitality acumen. The Career Partner Program bridges this gap with structured mentoring and interview drills.
+                  {language === 'ja'
+                    ? 'モルディブの高級リゾートでは、洗練された英語での対話力、異文化共感力、おもてなしの精神が重視されます。キャリアパートナープログラムは、個別メンタリングと模擬面接を通じてこの架け橋となります。'
+                    : language === 'si'
+                    ? 'මාලදිවයිනේ සුඛෝපභෝගී හෝටල් ක්ෂේත්‍රය තුළ කථන ඉංග්‍රීසි, ආගන්තුක සත්කාරය සහ සංස්කෘතික අවබෝධය අගය කරයි. අපගේ වැඩසටහන මඟින් මේ සඳහා අවශ්‍ය නිසි පුහුණුව ලබාදේ.'
+                    : language === 'ta'
+                    ? 'மாலத்தீவு சொகுசு விடுதிகள் தகவல் தொடர்புத் திறன், கலாச்சார புரிதல் மற்றும் விருந்தோம்பல் பண்புகளை முதன்மையாகக் கொண்டுள்ளன. எங்கள் திட்டம் இதற்கான கட்டமைக்கப்பட்ட பயிற்சிகளை வழங்குகிறது.'
+                    : 'In the Maldives, luxury resorts prioritize conversational poise, cross-cultural empathy, and guest hospitality acumen. The Career Partner Program bridges this gap with structured mentoring and interview drills.'}
                 </p>
               </div>
             </div>
@@ -148,27 +165,31 @@ export const CareerPartnerPage: React.FC<CareerPartnerPageProps> = ({
                   <Briefcase className="w-5 h-5 text-sky-400" />
                 </div>
                 <div>
-                  <h3 className="text-base font-bold text-white">Career Profile Assessment</h3>
-                  <p className="text-[11px] text-slate-400">One-on-one consultation with GlobeLink mentors</p>
+                  <h3 className="text-base font-bold text-white">
+                    {language === 'ja' ? 'キャリア個別プロファイル評価' : language === 'si' ? 'වෘත්තීය පැතිකඩ ඇගයීම' : language === 'ta' ? 'தொழில் சுயவிவர மதிப்பீடு' : 'Career Profile Assessment'}
+                  </h3>
+                  <p className="text-[11px] text-slate-400">
+                    {language === 'ja' ? 'GlobeLink 専門カウンセラーによる1対1相談' : language === 'si' ? 'GlobeLink උපදේශකවරුන් සමඟ පුද්ගලික සාකච්ඡාව' : language === 'ta' ? 'GlobeLink ஆலோசகர்களுடன் நேரடி உரையாடல்' : 'One-on-one consultation with GlobeLink mentors'}
+                  </p>
                 </div>
               </div>
 
               <ul className="space-y-2.5 text-xs text-slate-300">
                 <li className="flex items-start gap-2.5">
                   <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <span>Comprehensive evaluation of academic &amp; vocational credentials</span>
+                  <span>{language === 'ja' ? '学歴・職歴・語学レベルの総合的査定' : language === 'si' ? 'අධ්‍යාපනික සහ වෘත්තීය සුදුසුකම් පූර්ණ ඇගයීම' : language === 'ta' ? 'கல்வி மற்றும் தொழில் தகுதிகளின் முழுமையான மதிப்பீடு' : 'Comprehensive evaluation of academic & vocational credentials'}</span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <span>Gulf &amp; Japanese resume formatting and keyword alignment</span>
+                  <span>{language === 'ja' ? '湾岸向けおよび日本向けレジュメの最適化' : language === 'si' ? 'ගල්ෆ් සහ ජපන් රැකියා සඳහා CV සකස් කිරීම' : language === 'ta' ? 'வளைகுடா மற்றும் ஜப்பான் தேவைகளுக்கு ஏற்ப CV தயாரித்தல்' : 'Gulf & Japanese resume formatting and keyword alignment'}</span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <span>Mock virtual interview drills with constructive critique</span>
+                  <span>{language === 'ja' ? 'フィードバック付きオンライン模擬面接' : language === 'si' ? 'ප්‍රතිපෝෂණ සහිත ආදර්ශ මාර්ගගත සම්මුඛ පරීක්ෂණ' : language === 'ta' ? 'வழிகாட்டலுடன் கூடிய மாதிரி இணைய நேர்காணல்' : 'Mock virtual interview drills with constructive critique'}</span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <span>Pre-departure workplace manners &amp; cultural adaptation</span>
+                  <span>{language === 'ja' ? '渡航前ビジネスマナー＆異文化適応オリエンテーション' : language === 'si' ? 'විදේශගත වීමට පෙර කාර්යාලීය හැසිරීම් සහ සංස්කෘතික හුරුව' : language === 'ta' ? 'வெளிநாடு செல்வதற்கு முன் பணியிட நடத்தை மற்றும் கலாச்சார பயிற்சி' : 'Pre-departure workplace manners & cultural adaptation'}</span>
                 </li>
               </ul>
 
@@ -180,7 +201,7 @@ export const CareerPartnerPage: React.FC<CareerPartnerPageProps> = ({
                   className="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md transition-colors"
                 >
                   <MessageCircle className="w-4 h-4 fill-white text-emerald-600" />
-                  <span>Ask About Career Guidance</span>
+                  <span>{language === 'ja' ? 'WhatsAppでキャリア相談' : language === 'si' ? 'වෘත්තීය මඟපෙන්වීම විමසන්න' : language === 'ta' ? 'தொழில் வழிகாட்டல் பற்றி கேளுங்கள்' : 'Ask About Career Guidance'}</span>
                 </a>
               </div>
             </div>
@@ -193,18 +214,24 @@ export const CareerPartnerPage: React.FC<CareerPartnerPageProps> = ({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <span className="text-xs font-bold text-sky-800 uppercase tracking-widest">
-              Core Training Pillars
+              {language === 'ja' ? '中核トレーニングの柱' : language === 'si' ? 'ප්‍රධාන පුහුණු අංශ' : language === 'ta' ? 'முக்கிய பயிற்சித் தூண்கள்' : 'Core Training Pillars'}
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-1">
-              Career Preparation Resources &amp; Modules
+              {language === 'ja' ? 'キャリア準備リソース＆研修モジュール' : language === 'si' ? 'වෘත්තීය සූදානම් කිරීමේ සම්පත් සහ මොඩියුල' : language === 'ta' ? 'தொழில் தயார்படுத்தல் வளங்கள் மற்றும் தொகுதிகள்' : 'Career Preparation Resources & Modules'}
             </h2>
             <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Equipping Sri Lankan professionals with practical CV formatting, professional communication, and international interview techniques.
+              {language === 'ja'
+                ? '実用的なCV作成、プロフェッショナルなコミュニケーション、国際面接のテクニックを身につけます。'
+                : language === 'si'
+                ? 'ප්‍රායෝගික CV සැකසීම, වෘත්තීය සන්නිවේදනය සහ ජාත්‍යන්තර සම්මුඛ පරීක්ෂණ ක්‍රමවේද පිළිබඳව පුහුණු කිරීම.'
+                : language === 'ta'
+                ? 'நடைமுறை CV தயாரிப்பு, தொழில்முறை தகவல் தொடர்பு மற்றும் சர்வதேச நேர்காணல் நுட்பங்களை வழங்குதல்.'
+                : 'Equipping Sri Lankan professionals with practical CV formatting, professional communication, and international interview techniques.'}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {CAREER_GUIDANCE_MODULES.map(module => (
+            {modules.map(module => (
               <div
                 key={module.id}
                 className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-7 shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
@@ -227,7 +254,7 @@ export const CareerPartnerPage: React.FC<CareerPartnerPageProps> = ({
 
                   <div className="pt-2 border-t border-slate-100 space-y-2">
                     <span className="text-xs font-bold text-slate-800 block">
-                      Key Practical Focus Areas:
+                      {language === 'ja' ? '主な重点実践項目：' : language === 'si' ? 'ප්‍රධාන ප්‍රායෝගික අංශ:' : language === 'ta' ? 'முக்கிய நடைமுறை பகுதிகள்:' : 'Key Practical Focus Areas:'}
                     </span>
                     <ul className="text-xs text-slate-600 space-y-1.5">
                       {module.points.map((pt, idx) => (
@@ -247,7 +274,7 @@ export const CareerPartnerPage: React.FC<CareerPartnerPageProps> = ({
                     rel="noopener noreferrer"
                     className="text-xs font-bold text-sky-700 hover:text-sky-900 inline-flex items-center gap-1.5"
                   >
-                    <span>Inquire about this training module on WhatsApp</span>
+                    <span>{language === 'ja' ? 'このモジュールについてWhatsAppで問い合わせる' : language === 'si' ? 'මෙම පුහුණු මොඩියුලය පිළිබඳව WhatsApp හරහා විමසන්න' : language === 'ta' ? 'இந்த தொகுதி பற்றி WhatsApp இல் விசாரிக்கவும்' : 'Inquire about this training module on WhatsApp'}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </a>
                 </div>
@@ -274,8 +301,8 @@ export const CareerPartnerPage: React.FC<CareerPartnerPageProps> = ({
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <InquiryForm
             id="career-preparation-inquiry"
-            title="Book a Career Guidance & Assessment Session"
-            subtitle="Submit your career background to receive honest, structured feedback from GlobeLink career advisors."
+            title={language === 'ja' ? 'キャリア個別相談・査定セッション予約' : language === 'si' ? 'වෘත්තීය මඟපෙන්වීම සහ ඇගයීමක් වෙන්කරවා ගන්න' : language === 'ta' ? 'தொழில் வழிகாட்டல் அமர்வை முன்பதிவு செய்யுங்கள்' : 'Book a Career Guidance & Assessment Session'}
+            subtitle={language === 'ja' ? '職務経歴をお送りいただくことで、GlobeLink のアドバイザーより率直で客観的なアドバイスをお届けします。' : language === 'si' ? 'ඔබගේ වෘත්තීය පසුබිම ඉදිරිපත් කර GlobeLink උපදේශකවරුන්ගෙන් වටිනා මඟපෙන්වීමක් ලබාගන්න.' : language === 'ta' ? 'GlobeLink ஆலோசகர்களிடமிருந்து நேர்மையான கருத்துக்களைப் பெற உங்கள் தொழில் பின்னணியைச் சமர்ப்பிக்கவும்.' : 'Submit your career background to receive honest, structured feedback from GlobeLink career advisors.'}
             initialService="Your Career Partner Program"
             onOpenSupabaseModal={onOpenSupabaseModal}
           />
@@ -284,3 +311,4 @@ export const CareerPartnerPage: React.FC<CareerPartnerPageProps> = ({
     </div>
   );
 };
+

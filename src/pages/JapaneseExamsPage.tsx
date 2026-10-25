@@ -80,20 +80,20 @@ export const JapaneseExamsPage: React.FC<JapaneseExamsPageProps> = ({
   return (
     <div className="flex flex-col min-h-screen bg-slate-50">
       <SEOHead
-        title="Japanese Exams & Registration Resource Centre | GlobeLink Sri Lanka"
-        description="Comprehensive official examination guidelines, EJU Japanese university admission, JLPT, Prometric SSW Agriculture, NAT-TEST, JFT-Basic, and exam registration resources."
+        title={t.pageTitle}
+        description={t.pageSubtitle}
         canonicalPath="/japanese-exams"
         breadcrumbs={[
-          { name: 'Home', path: '/' },
+          { name: t.filterAll === 'All' ? 'Home' : (language === 'ja' ? 'ホーム' : language === 'si' ? 'මුල් පිටුව' : 'முகப்பு'), path: '/' },
           { name: "Let's Go Japan", path: '/lets-go-japan' },
-          { name: 'Japanese Exams & Registration', path: '/japanese-exams' }
+          { name: t.pageTitle, path: '/japanese-exams' }
         ]}
       />
 
       <Breadcrumbs
         items={[
           { name: "Let's Go Japan", pageId: 'lets-go-japan' },
-          { name: 'Japanese Exams & Registration' }
+          { name: t.pageTitle }
         ]}
         onNavigate={onNavigate}
       />
@@ -125,10 +125,10 @@ export const JapaneseExamsPage: React.FC<JapaneseExamsPageProps> = ({
                 <CheckCircle2 className="w-3.5 h-3.5 text-rose-400" /> JLPT N5-N1
               </span>
               <span className="flex items-center gap-1.5 bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700">
-                <CheckCircle2 className="w-3.5 h-3.5 text-rose-400" /> EJU University Admission
+                <CheckCircle2 className="w-3.5 h-3.5 text-rose-400" /> {language === 'ja' ? 'EJU 日本留学試験' : language === 'si' ? 'EJU විශ්වවිද්‍යාල ප්‍රවේශ' : language === 'ta' ? 'EJU பல்கலைக்கழக சேர்க்கை' : 'EJU University Admission'}
               </span>
               <span className="flex items-center gap-1.5 bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700">
-                <CheckCircle2 className="w-3.5 h-3.5 text-rose-400" /> Prometric SSW (Agriculture & Skills)
+                <CheckCircle2 className="w-3.5 h-3.5 text-rose-400" /> Prometric SSW ({language === 'ja' ? '特定技能・農業' : language === 'si' ? 'කෘෂිකාර්මික හා කුසලතා' : language === 'ta' ? 'விவசாயம் & திறன்கள்' : 'Agriculture & Skills'})
               </span>
               <span className="flex items-center gap-1.5 bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700">
                 <CheckCircle2 className="w-3.5 h-3.5 text-rose-400" /> JFT-Basic &amp; NAT-TEST
@@ -158,14 +158,20 @@ export const JapaneseExamsPage: React.FC<JapaneseExamsPageProps> = ({
             {/* Direct WhatsApp Guidance Button */}
             <a
               href={`${COMPANY_INFO.whatsappUrl}?text=${encodeURIComponent(
-                'Hello GlobeLink! I want to ask for guidance regarding Japanese examination registrations and batch schedules.'
+                language === 'ja'
+                  ? 'GlobeLink公式窓口へ：日本の公式試験申込みや開講日程について教えてください。'
+                  : language === 'si'
+                  ? 'GlobeLink වෙත: ජපන් විභාග ලියාපදිංචිය සහ පන්ති කාලසටහන පිළිබඳව විමසීමට කැමැත්තෙමි.'
+                  : language === 'ta'
+                  ? 'GlobeLink: ஜப்பானிய தேர்வு பதிவு மற்றும் வகுப்பு அட்டவணை பற்றி அறிய விரும்புகிறேன்.'
+                  : 'Hello GlobeLink! I want to ask for guidance regarding Japanese examination registrations and batch schedules.'
               )}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs transition-colors shrink-0 shadow-2xs"
             >
               <MessageCircle className="w-4 h-4" />
-              <span>Ask About Exam Registration</span>
+              <span>{language === 'ja' ? '試験登録・日程を相談する' : language === 'si' ? 'විභාග ලියාපදිංචිය විමසන්න' : language === 'ta' ? 'தேர்வு பதிவு பற்றி கேளுங்கள்' : 'Ask About Exam Registration'}</span>
             </a>
           </div>
 
@@ -195,7 +201,7 @@ export const JapaneseExamsPage: React.FC<JapaneseExamsPageProps> = ({
             </div>
             <div className="space-y-2 flex-1">
               <span className="text-[11px] font-bold text-rose-400 uppercase tracking-wider">
-                Specialized University Preparation Division
+                {language === 'ja' ? '大学・大学院進学指導部門' : language === 'si' ? 'විශේෂිත විශ්වවිද්‍යාල සූදානම් කිරීමේ අංශය' : language === 'ta' ? 'பல்கலைக்கழக தயார்படுத்தல் பிரிவு' : 'Specialized University Preparation Division'}
               </span>
               <h2 className="text-xl sm:text-2xl font-extrabold text-white">
                 {t.ejuSpecialTitle}
@@ -213,19 +219,25 @@ export const JapaneseExamsPage: React.FC<JapaneseExamsPageProps> = ({
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white text-slate-900 hover:bg-slate-100 font-bold text-xs transition-colors"
                 >
-                  <span>Official University Entrance Reference</span>
+                  <span>{language === 'ja' ? '公式大学進学リファレンス' : language === 'si' ? 'නිල විශ්වවිද්‍යාල ප්‍රවේශ මූලාශ්‍ර' : language === 'ta' ? 'அதிகாரப்பூர்வ பல்கலைக்கழக நுழைவு குறிப்பு' : 'Official University Entrance Reference'}</span>
                   <ExternalLink className="w-3.5 h-3.5" />
                 </a>
                 <a
                   href={`${COMPANY_INFO.whatsappUrl}?text=${encodeURIComponent(
-                    'Hello GlobeLink! I want to ask about EJU examination preparation and Japanese university entrance requirements.'
+                    language === 'ja'
+                      ? 'GlobeLink公式窓口へ：EJU日本留学試験対策および大学出願について相談希望です。'
+                      : language === 'si'
+                      ? 'GlobeLink වෙත: EJU විභාගය සහ ජපන් විශ්වවිද්‍යාල ප්‍රවේශ අවශ්‍යතා පිළිබඳව විමසීමට කැමැත්තෙමි.'
+                      : language === 'ta'
+                      ? 'GlobeLink: EJU தேர்வு மற்றும் ஜப்பானிய பல்கலைக்கழக தேவைகள் பற்றி அறிய விரும்புகிறேன்.'
+                      : 'Hello GlobeLink! I want to ask about EJU examination preparation and Japanese university entrance requirements.'
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs transition-colors"
                 >
                   <MessageCircle className="w-3.5 h-3.5" />
-                  <span>Ask About EJU Preparation</span>
+                  <span>{language === 'ja' ? 'EJU対策について相談する' : language === 'si' ? 'EJU සූදානම ගැන විමසන්න' : language === 'ta' ? 'EJU பயிற்சி பற்றி கேளுங்கள்' : 'Ask About EJU Preparation'}</span>
                 </a>
               </div>
             </div>
@@ -243,14 +255,14 @@ export const JapaneseExamsPage: React.FC<JapaneseExamsPageProps> = ({
                 <div>
                   <div className="flex items-center gap-2">
                     <h2 className="text-lg font-bold text-slate-900">
-                      Upcoming Examination &amp; Registration Schedule
+                      {language === 'ja' ? '実施予定の公式試験・願書受付日程' : language === 'si' ? 'ඉදිරි විභාග සහ ලියාපදිංචි කාලසටහන' : language === 'ta' ? 'வரவிருக்கும் தேர்வு மற்றும் பதிவு அட்டவணை' : 'Upcoming Examination & Registration Schedule'}
                     </h2>
                     <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">
-                      Live Dynamic Schedule
+                      {language === 'ja' ? '最新動的スケジュール' : language === 'si' ? 'යාවත්කාලීන කාලසටහන' : language === 'ta' ? 'நேரடி அட்டவணை' : 'Live Dynamic Schedule'}
                     </span>
                   </div>
                   <p className="text-xs text-slate-500">
-                    Official test dates and registration deadlines managed by GlobeLink Let's Go Japan coordinators
+                    {language === 'ja' ? 'GlobeLink Let\'s Go Japan 専門スタッフが管理する公式試験期および出願締切日' : language === 'si' ? 'GlobeLink Let\'s Go Japan සම්බන්ධීකාරකවරුන් විසින් කළමනාකරණය කරන නිල විභාග දින සහ ලියාපදිංචි අවසන් දින' : language === 'ta' ? 'GlobeLink ஒருங்கிணைப்பாளர்களால் நிர்வகிக்கப்படும் அதிகாரப்பூர்வ தேர்வு தேதிகள் மற்றும் காலக்கெடு' : 'Official test dates and registration deadlines managed by GlobeLink Let\'s Go Japan coordinators'}
                   </p>
                 </div>
               </div>
@@ -283,14 +295,14 @@ export const JapaneseExamsPage: React.FC<JapaneseExamsPageProps> = ({
                   <div className="space-y-2 pt-2 border-t border-slate-200/80 text-xs">
                     {exam.exam_date && (
                       <div className="flex items-center justify-between">
-                        <span className="text-slate-500">Exam Date:</span>
+                        <span className="text-slate-500">{language === 'ja' ? '試験日：' : language === 'si' ? 'විභාග දිනය:' : language === 'ta' ? 'தேர்வு தேதி:' : 'Exam Date:'}</span>
                         <span className="font-semibold text-slate-900">{exam.exam_date}</span>
                       </div>
                     )}
 
                     {exam.registration_deadline && (
                       <div className="flex items-center justify-between text-rose-700">
-                        <span className="font-medium">Registration:</span>
+                        <span className="font-medium">{language === 'ja' ? '締切日：' : language === 'si' ? 'අවසන් දිනය:' : language === 'ta' ? 'காலக்கெடு:' : 'Registration:'}</span>
                         <span className="font-bold">{exam.registration_deadline}</span>
                       </div>
                     )}
@@ -302,7 +314,7 @@ export const JapaneseExamsPage: React.FC<JapaneseExamsPageProps> = ({
                         rel="noopener noreferrer"
                         className="w-full mt-2 py-2 px-3 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-center font-semibold text-xs inline-flex items-center justify-center gap-1.5 transition-colors"
                       >
-                        <span>Official Registration Portal</span>
+                        <span>{language === 'ja' ? '公式出願・受験ポータル' : language === 'si' ? 'නිල ලියාපදිංචි පෝරමය' : language === 'ta' ? 'அதிகாரப்பூர்வ பதிவு தளம்' : 'Official Registration Portal'}</span>
                         <ExternalLink className="w-3.5 h-3.5" />
                       </a>
                     )}
@@ -317,10 +329,10 @@ export const JapaneseExamsPage: React.FC<JapaneseExamsPageProps> = ({
         <section className="space-y-6">
           <div className="flex items-center justify-between">
             <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900">
-              Standardized Japanese Examinations &amp; Assessments
+              {language === 'ja' ? '公式日本語能力試験＆技能評価試験一覧' : language === 'si' ? 'ප්‍රමිතිගත ජපන් විභාග සහ ඇගයීම්' : language === 'ta' ? 'ஜப்பானிய தேர்வுகள் மற்றும் மதிப்பீடுகள்' : 'Standardized Japanese Examinations & Assessments'}
             </h2>
             <span className="text-xs text-slate-500 font-medium">
-              Showing {filteredExams.length} Resources
+              {language === 'ja' ? `${filteredExams.length} 件の試験情報を表示中` : language === 'si' ? `සම්පත් ${filteredExams.length} ක් පෙන්වයි` : language === 'ta' ? `${filteredExams.length} வளங்கள் காட்டப்படுகின்றன` : `Showing ${filteredExams.length} Resources`}
             </span>
           </div>
 
@@ -339,7 +351,7 @@ export const JapaneseExamsPage: React.FC<JapaneseExamsPageProps> = ({
             </div>
             <div className="space-y-2 flex-1">
               <span className="text-[11px] font-bold text-sky-600 uppercase tracking-wider">
-                Occupational Assessment Framework
+                {language === 'ja' ? '特定技能職業評価フレームワーク' : language === 'si' ? 'වෘත්තීය ඇගයීම් රාමුව' : language === 'ta' ? 'தொழில் மதிப்பீட்டு கட்டமைப்பு' : 'Occupational Assessment Framework'}
               </span>
               <h3 className="text-xl font-bold text-slate-900">
                 {t.sswSpecialTitle}
@@ -349,7 +361,7 @@ export const JapaneseExamsPage: React.FC<JapaneseExamsPageProps> = ({
               </p>
               <div className="bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs text-slate-700 space-y-1">
                 <p>
-                  <strong>Verified Prometric Exam Resources:</strong>
+                  <strong>{language === 'ja' ? '検証済み Prometric 試験リソース：' : language === 'si' ? 'තහවුරු කළ Prometric විභාග මූලාශ්‍ර:' : language === 'ta' ? 'சரிபார்க்கப்பட்ட Prometric தேர்வு வளங்கள்:' : 'Verified Prometric Exam Resources:'}</strong>
                 </p>
                 <div className="flex flex-wrap gap-3 pt-1">
                   <a
@@ -358,7 +370,7 @@ export const JapaneseExamsPage: React.FC<JapaneseExamsPageProps> = ({
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1 text-sky-700 hover:text-sky-900 underline font-semibold"
                   >
-                    Official Prometric Exam List <ExternalLink className="w-3 h-3" />
+                    {language === 'ja' ? '公式 Prometric 試験リスト' : language === 'si' ? 'නිල Prometric විභාග ලැයිස්තුව' : language === 'ta' ? 'அதிகாரப்பூர்வ Prometric தேர்வு பட்டியல்' : 'Official Prometric Exam List'} <ExternalLink className="w-3 h-3" />
                   </a>
                   <span className="text-slate-300">|</span>
                   <a
@@ -367,7 +379,7 @@ export const JapaneseExamsPage: React.FC<JapaneseExamsPageProps> = ({
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1 text-sky-700 hover:text-sky-900 underline font-semibold"
                   >
-                    Agriculture Skill Assessment Test Level 1 <ExternalLink className="w-3 h-3" />
+                    {language === 'ja' ? '特定技能 農業技能測定試験 1号' : language === 'si' ? 'කෘෂිකාර්මික කුසලතා ඇගයීම් විභාගය 1 වන මට්ටම' : language === 'ta' ? 'விவசாய திறன் மதிப்பீட்டு தேர்வு நிலை 1' : 'Agriculture Skill Assessment Test Level 1'} <ExternalLink className="w-3 h-3" />
                   </a>
                 </div>
               </div>
@@ -392,20 +404,26 @@ export const JapaneseExamsPage: React.FC<JapaneseExamsPageProps> = ({
         <section className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-xs space-y-6">
           <div className="max-w-2xl">
             <span className="text-xs font-bold text-rose-600 uppercase tracking-wider">
-              Direct Guidance Desk
+              {language === 'ja' ? '個別相談窓口' : language === 'si' ? 'සෘජු මඟපෙන්වීම් කවුළුව' : language === 'ta' ? 'நேரடி வழிகாட்டல் மையம்' : 'Direct Guidance Desk'}
             </span>
             <h2 className="text-2xl font-extrabold text-slate-900 mt-1">
-              Need Personal Advice on Japanese Exams or University Admissions?
+              {language === 'ja' ? '日本の各種試験または大学進学について個別相談が必要ですか？' : language === 'si' ? 'ජපන් විභාග හෝ විශ්වවිද්‍යාල ප්‍රවේශය පිළිබඳ පෞද්ගලික උපදෙස් අවශ්‍යද?' : language === 'ta' ? 'ஜப்பானிய தேர்வுகள் அல்லது பல்கலைக்கழக சேர்க்கை குறித்த ஆலோசனை தேவையா?' : 'Need Personal Advice on Japanese Exams or University Admissions?'}
             </h2>
             <p className="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">
-              Submit your inquiry below. Our Japanese education coordinators will contact you with batch schedules, exam dates, and registration steps.
+              {language === 'ja'
+                ? '以下のフォームよりお問い合わせください。専任の日本語教育コーディネーターが開講日程、試験期、出願手順をご案内します。'
+                : language === 'si'
+                ? 'ඔබගේ විමසීම පහතින් යොමු කරන්න. අපගේ ජපන් අධ්‍යාපන සම්බන්ධීකාරකවරුන් පන්ති කාලසටහන්, විභාග දින සහ ලියාපදිංචි පියවර පිළිබඳව ඔබට මඟපෙන්වනු ඇත.'
+                : language === 'ta'
+                ? 'உங்கள் வினவலை கீழே சமர்ப்பிக்கவும். எங்கள் ஒருங்கிணைப்பாளர்கள் வகுப்பு அட்டவணைகள் மற்றும் தேர்வு வழிகாட்டலுடன் உங்களை தொடர்புகொள்வார்கள்.'
+                : 'Submit your inquiry below. Our Japanese education coordinators will contact you with batch schedules, exam dates, and registration steps.'}
             </p>
           </div>
 
           <InquiryForm
             id="exams-inquiry"
-            title="Japanese Education Consultation"
-            subtitle="Connect with GlobeLink's Let's Go Japan coordinators for verified exam guidance and class schedules."
+            title={language === 'ja' ? '日本留学・試験個別カウンセリング' : language === 'si' ? 'ජපන් අධ්‍යාපන උපදේශනය' : language === 'ta' ? 'ஜப்பானிய கல்வி ஆலோசனை' : 'Japanese Education Consultation'}
+            subtitle={language === 'ja' ? 'GlobeLink Let\'s Go Japan 専門スタッフが公式試験情報や受講クラスをご案内します。' : language === 'si' ? 'තහවුරු කළ විභාග මඟපෙන්වීම සහ පන්ති කාලසටහන් සඳහා GlobeLink Let\'s Go Japan සම්බන්ධීකාරකවරුන් සමඟ සම්බන්ධ වන්න.' : language === 'ta' ? 'தேர்வு வழிகாட்டல் மற்றும் வகுப்பு அட்டவணைகளுக்கு GlobeLink இன் Let\'s Go Japan ஒருங்கிணைப்பாளர்களுடன் இணையுங்கள்.' : 'Connect with GlobeLink\'s Let\'s Go Japan coordinators for verified exam guidance and class schedules.'}
             onOpenSupabaseModal={onOpenSupabaseModal}
           />
         </section>

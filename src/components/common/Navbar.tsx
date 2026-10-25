@@ -12,12 +12,15 @@ import {
   CalendarCheck,
   Languages,
   BookOpen,
-  Check
+  Check,
+  Search,
+  Layers
 } from 'lucide-react';
 import { PageId, SupportedLanguage } from '../../types';
 import { COMPANY_INFO } from '../../data/company';
 import { useLanguage, SUPPORTED_LANGUAGES } from '../../contexts/LanguageContext';
 import { TRANSLATIONS } from '../../data/translations';
+import { GlobalSearchBar } from './GlobalSearchBar';
 
 interface NavbarProps {
   currentPage: PageId;
@@ -34,6 +37,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   const t = TRANSLATIONS[language].nav;
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [programsDropdownOpen, setProgramsDropdownOpen] = useState(false);
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -97,11 +101,18 @@ export const Navbar: React.FC<NavbarProps> = ({
             </span>
           </div>
 
-          <div className="flex items-center space-x-4">
-            <span className="text-amber-400 text-[11px] font-medium flex items-center gap-1.5">
+          <div className="flex items-center space-x-3 xl:space-x-4">
+            <span className="text-amber-400 text-[11px] font-medium hidden xl:flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
               {t.intakeOpen}
             </span>
+
+            <span className="text-slate-700 hidden xl:inline">|</span>
+
+            {/* Global Search Bar alongside All Languages menu */}
+            <div className="w-52 lg:w-64 xl:w-72">
+              <GlobalSearchBar onNavigate={handleNavClick} />
+            </div>
 
             <span className="text-slate-700">|</span>
 
@@ -225,7 +236,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                   className={`inline-flex items-center gap-1 px-2.5 py-2 font-medium transition-colors ${
                     currentPage === 'lets-go-japan' ||
                     currentPage === 'japanese-language-courses' ||
-                    currentPage === 'japanese-exams'
+                    currentPage === 'japanese-exams' ||
+                    currentPage === 'japan-resources'
                       ? 'text-sky-400 border-b-2 border-sky-400'
                       : 'text-slate-200 hover:text-white'
                   }`}
@@ -273,6 +285,21 @@ export const Navbar: React.FC<NavbarProps> = ({
                       <div>
                         <p className="font-semibold text-white">{t.japaneseCourses}</p>
                         <p className="text-slate-400 text-[11px]">JLPT N5-N3, JFT, NAT-TEST &amp; Spoken</p>
+                      </div>
+                    </button>
+                    <button
+                      onClick={() => handleNavClick('japan-resources')}
+                      className="w-full text-left px-4 py-2.5 text-xs hover:bg-slate-800 text-slate-200 hover:text-white flex items-start gap-2.5 bg-slate-850/40"
+                    >
+                      <Layers className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-semibold text-white flex items-center gap-1.5">
+                          {t.japanResources}
+                          <span className="text-[10px] bg-sky-950 text-sky-300 px-1.5 py-0.2 rounded border border-sky-800">
+                            SSW &amp; Tools
+                          </span>
+                        </p>
+                        <p className="text-slate-400 text-[11px]">Official SSW, NBAC, Kashikoi &amp; Fees Tracker</p>
                       </div>
                     </button>
                   </div>
@@ -392,11 +419,31 @@ export const Navbar: React.FC<NavbarProps> = ({
               </button>
             </div>
 
-            {/* Mobile menu and Language button */}
-            <div className="lg:hidden flex items-center space-x-2">
+            {/* Mobile menu, Search and Language buttons */}
+            <div className="lg:hidden flex items-center space-x-1.5 sm:space-x-2">
+              {/* Quick Mobile Search Button */}
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileSearchOpen(!mobileSearchOpen);
+                  if (langDropdownOpen) setLangDropdownOpen(false);
+                }}
+                className={`p-2 rounded-lg border transition-colors ${
+                  mobileSearchOpen
+                    ? 'bg-sky-600 text-white border-sky-500'
+                    : 'bg-slate-800 text-slate-300 hover:text-white border-slate-700'
+                }`}
+                aria-label="Toggle search"
+              >
+                <Search className="w-4 h-4 text-sky-400" />
+              </button>
+
               {/* Quick Mobile Language Pill */}
               <button
-                onClick={() => setLangDropdownOpen(!langDropdownOpen)}
+                onClick={() => {
+                  setLangDropdownOpen(!langDropdownOpen);
+                  if (mobileSearchOpen) setMobileSearchOpen(false);
+                }}
                 className="px-2.5 py-1.5 text-xs bg-slate-800 text-slate-200 border border-slate-700 rounded-lg font-medium flex items-center gap-1"
                 aria-label="Language"
               >
@@ -405,7 +452,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               </button>
 
               <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                onClick={() => {
+                  setMobileMenuOpen(!mobileMenuOpen);
+                  if (mobileSearchOpen) setMobileSearchOpen(false);
+                  if (langDropdownOpen) setLangDropdownOpen(false);
+                }}
                 className="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition-colors"
                 aria-label="Toggle navigation menu"
               >
@@ -414,6 +465,13 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
           </div>
         </div>
+
+        {/* Mobile Search Popover/Bar */}
+        {mobileSearchOpen && (
+          <div className="lg:hidden bg-slate-950 border-t border-b border-slate-800 px-4 py-3 animate-in fade-in duration-150">
+            <GlobalSearchBar onNavigate={(p) => { handleNavClick(p); setMobileSearchOpen(false); }} isMobileCompact />
+          </div>
+        )}
 
         {/* Mobile Language Dropdown Popover */}
         {langDropdownOpen && (
@@ -447,6 +505,11 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
           <div className="lg:hidden bg-slate-950 border-b border-slate-800 px-4 pt-3 pb-6 space-y-1 animate-in slide-in-from-top-2 duration-200">
+            {/* Quick Search inside Mobile Drawer */}
+            <div className="pb-3 border-b border-slate-800/80 mb-2">
+              <GlobalSearchBar onNavigate={handleNavClick} isMobileCompact />
+            </div>
+
             <button
               onClick={() => handleNavClick('home')}
               className={`w-full text-left px-3 py-2.5 rounded-md text-sm font-medium ${
@@ -499,6 +562,18 @@ export const Navbar: React.FC<NavbarProps> = ({
                 }`}
               >
                 &bull; {t.japaneseCourses}
+              </button>
+
+              <button
+                onClick={() => handleNavClick('japan-resources')}
+                className={`w-full text-left pl-6 pr-3 py-2 rounded-md text-xs font-medium flex items-center justify-between ${
+                  currentPage === 'japan-resources' ? 'text-sky-400 font-semibold bg-sky-950/40' : 'text-slate-300 hover:bg-slate-900'
+                }`}
+              >
+                <span>&bull; {t.japanResources}</span>
+                <span className="text-[10px] bg-sky-900/60 px-1.5 py-0.5 rounded text-sky-300 border border-sky-700">
+                  SSW &amp; Tools
+                </span>
               </button>
             </div>
 

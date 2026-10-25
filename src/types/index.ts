@@ -9,6 +9,7 @@ export type PageId =
   | 'career-preparation'
   | 'international-careers'
   | 'migration-visa-support'
+  | 'japan-resources'
   | 'contact'
   | 'privacy-policy'
   | 'terms-and-conditions'
@@ -16,35 +17,112 @@ export type PageId =
 
 export type SupportedLanguage = 'en' | 'si' | 'ta' | 'ja';
 
+export type SearchCategory =
+  | 'Courses & Fees'
+  | 'Exams & EJU'
+  | 'SSW & Visas'
+  | 'Career Q&A'
+  | 'Events & Vacancies'
+  | 'Resources & Tools';
+
+export interface SearchResultItem {
+  id: string;
+  title: string;
+  titleSi?: string;
+  titleTa?: string;
+  titleJa?: string;
+  category: SearchCategory;
+  description: string;
+  descriptionSi?: string;
+  descriptionTa?: string;
+  descriptionJa?: string;
+  targetPage: PageId;
+  targetHash?: string;
+  externalUrl?: string;
+  badge?: string;
+  keywords: string[];
+}
+
 export interface JapaneseCourse {
   id: string;
   code: string;
   title: string;
   japaneseTitle?: string;
+  titleSi?: string;
+  titleTa?: string;
+  titleJa?: string;
   level: string;
+  levelSi?: string;
+  levelTa?: string;
+  levelJa?: string;
   targetAudience: string;
+  targetAudienceSi?: string;
+  targetAudienceTa?: string;
+  targetAudienceJa?: string;
   duration: string;
+  durationSi?: string;
+  durationTa?: string;
+  durationJa?: string;
   hours: string;
+  hoursSi?: string;
+  hoursTa?: string;
+  hoursJa?: string;
   schedule: string;
+  scheduleSi?: string;
+  scheduleTa?: string;
+  scheduleJa?: string;
   feeLkr: string;
+  feeLkrSi?: string;
+  feeLkrTa?: string;
+  feeLkrJa?: string;
   mode: 'Online (Zoom / Meet)' | 'Physical / Hybrid' | 'Flexible Online';
   highlights: string[];
+  highlightsSi?: string[];
+  highlightsTa?: string[];
+  highlightsJa?: string[];
   syllabusOverview: string[];
+  syllabusOverviewSi?: string[];
+  syllabusOverviewTa?: string[];
+  syllabusOverviewJa?: string[];
   intakeStatus: 'Enrolling Now' | 'Upcoming Intake' | 'Limited Seats';
+  intakeStatusSi?: string;
+  intakeStatusTa?: string;
+  intakeStatusJa?: string;
   isPopular?: boolean;
 }
 
 export interface Destination {
   id: string;
   country: string;
+  countrySi?: string;
+  countryTa?: string;
+  countryJa?: string;
   tagline: string;
+  taglineSi?: string;
+  taglineTa?: string;
+  taglineJa?: string;
   heroImage: string;
   flagEmoji: string;
   servicesAvailable: string[];
+  servicesAvailableSi?: string[];
+  servicesAvailableTa?: string[];
+  servicesAvailableJa?: string[];
   visaCategoriesSupported: string[];
+  visaCategoriesSupportedSi?: string[];
+  visaCategoriesSupportedTa?: string[];
+  visaCategoriesSupportedJa?: string[];
   keyHighlights: string[];
+  keyHighlightsSi?: string[];
+  keyHighlightsTa?: string[];
+  keyHighlightsJa?: string[];
   overview: string;
+  overviewSi?: string;
+  overviewTa?: string;
+  overviewJa?: string;
   complianceNotice: string;
+  complianceNoticeSi?: string;
+  complianceNoticeTa?: string;
+  complianceNoticeJa?: string;
 }
 
 export interface InquiryFormData {
@@ -119,18 +197,42 @@ export interface ExamResourceLink {
 export interface ExamResource {
   id: string;
   name: string;
+  nameSi?: string;
+  nameTa?: string;
+  nameJa?: string;
   acronym: string;
   japaneseName: string;
   category: ExamCategory;
+  categorySi?: string;
+  categoryTa?: string;
+  categoryJa?: string;
   shortExplanation: string;
+  shortExplanationSi?: string;
+  shortExplanationTa?: string;
+  shortExplanationJa?: string;
   levelsOrSectors: string[];
+  levelsOrSectorsSi?: string[];
+  levelsOrSectorsTa?: string[];
+  levelsOrSectorsJa?: string[];
   globeLinkPreparation: string;
+  globeLinkPreparationSi?: string;
+  globeLinkPreparationTa?: string;
+  globeLinkPreparationJa?: string;
   officialReferenceLinks: ExamResourceLink[];
   registrationLink?: ExamResourceLink;
   whatsappMessage: string;
   badgeLabel?: string;
+  badgeLabelSi?: string;
+  badgeLabelTa?: string;
+  badgeLabelJa?: string;
   eligibilityNotes?: string;
+  eligibilityNotesSi?: string;
+  eligibilityNotesTa?: string;
+  eligibilityNotesJa?: string;
   complianceDisclaimer?: string;
+  complianceDisclaimerSi?: string;
+  complianceDisclaimerTa?: string;
+  complianceDisclaimerJa?: string;
 }
 
 export type AnnouncementStatus =

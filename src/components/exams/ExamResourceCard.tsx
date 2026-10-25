@@ -4,6 +4,7 @@ import { ExamResource } from '../../types';
 import { COMPANY_INFO } from '../../data/company';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { TRANSLATIONS } from '../../data/translations';
+import { getLocalizedExam } from '../../utils/localizedContent';
 
 interface ExamResourceCardProps {
   exam: ExamResource;
@@ -12,8 +13,9 @@ interface ExamResourceCardProps {
 export const ExamResourceCard: React.FC<ExamResourceCardProps> = ({ exam }) => {
   const { language } = useLanguage();
   const t = TRANSLATIONS[language].exams;
+  const locExam = getLocalizedExam(exam, language);
 
-  const whatsappUrl = `${COMPANY_INFO.whatsappUrl}?text=${encodeURIComponent(exam.whatsappMessage)}`;
+  const whatsappUrl = `${COMPANY_INFO.whatsappUrl}?text=${encodeURIComponent(locExam.whatsappMessage || exam.whatsappMessage)}`;
 
   return (
     <article className="bg-white rounded-2xl border border-slate-200/90 shadow-xs hover:shadow-md transition-all duration-200 overflow-hidden flex flex-col justify-between">
@@ -23,13 +25,13 @@ export const ExamResourceCard: React.FC<ExamResourceCardProps> = ({ exam }) => {
         <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
           <div className="flex items-center gap-2">
             <span className="font-bold text-rose-600 tracking-wide uppercase text-[11px]">
-              {exam.category}
+              {locExam.category}
             </span>
-            {exam.badgeLabel && (
+            {locExam.badgeLabel && (
               <>
                 <span className="text-slate-300">·</span>
                 <span className="text-slate-500 font-medium text-[11px]">
-                  {exam.badgeLabel}
+                  {locExam.badgeLabel}
                 </span>
               </>
             )}
@@ -43,30 +45,30 @@ export const ExamResourceCard: React.FC<ExamResourceCardProps> = ({ exam }) => {
         {/* Title & Japanese Name */}
         <div>
           <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight leading-snug">
-            {exam.name}{' '}
+            {locExam.name}{' '}
             <span className="text-rose-600 font-mono text-lg font-bold">
-              ({exam.acronym})
+              ({locExam.acronym})
             </span>
           </h3>
           <p className="text-xs font-medium text-slate-500 mt-1 font-serif tracking-wide">
-            {exam.japaneseName}
+            {locExam.japaneseName}
           </p>
         </div>
 
         {/* Short Explanation */}
         <p className="text-sm text-slate-600 leading-relaxed">
-          {exam.shortExplanation}
+          {locExam.shortExplanation}
         </p>
 
         {/* Levels or Sectors */}
-        {exam.levelsOrSectors && exam.levelsOrSectors.length > 0 && (
+        {locExam.levelsOrSectors && locExam.levelsOrSectors.length > 0 && (
           <div className="pt-2 border-t border-slate-100 space-y-2">
             <p className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
               <GraduationCap className="w-3.5 h-3.5 text-sky-600" />
               {t.availableLevels}
             </p>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-xs text-slate-600">
-              {exam.levelsOrSectors.map((lvl, idx) => (
+              {locExam.levelsOrSectors.map((lvl, idx) => (
                 <li key={idx} className="flex items-start gap-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
                   <span className="leading-snug">{lvl}</span>
@@ -83,14 +85,14 @@ export const ExamResourceCard: React.FC<ExamResourceCardProps> = ({ exam }) => {
             {t.globeLinkPrepTitle}
           </p>
           <p className="text-slate-600 leading-relaxed">
-            {exam.globeLinkPreparation}
+            {locExam.globeLinkPreparation}
           </p>
         </div>
 
         {/* Compliance or Eligibility Notes */}
-        {exam.complianceDisclaimer && (
+        {locExam.complianceDisclaimer && (
           <p className="text-[11px] text-slate-500 italic bg-amber-50/70 p-2.5 rounded-lg border border-amber-200/50 leading-relaxed">
-            {exam.complianceDisclaimer}
+            {locExam.complianceDisclaimer}
           </p>
         )}
       </div>

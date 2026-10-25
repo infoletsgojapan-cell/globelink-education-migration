@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Send, CheckCircle2, AlertCircle, MessageCircle, Database, HelpCircle } from 'lucide-react';
 import { InquiryFormData } from '../../types';
 import { submitInquiry, InquirySubmissionResult, isSupabaseConfigured } from '../../services/inquiryService';
+import { useLanguage } from '../../contexts/LanguageContext';
+import { TRANSLATIONS } from '../../data/translations';
 
 interface InquiryFormProps {
   initialDestination?: string;
@@ -13,15 +15,45 @@ interface InquiryFormProps {
   id?: string;
 }
 
+// Localized options for destinations, services, and contact methods
+const DESTINATION_OPTIONS = [
+  { id: 'Japan', label: { en: "Japan (Let's Go Japan / EJU / SSW)", si: "ජපානය (Let's Go Japan / EJU / SSW)", ta: "ஜப்பான் (Let's Go Japan / EJU / SSW)", ja: '日本（Let\'s Go Japan / 留学・特定技能）' } },
+  { id: 'Dubai', label: { en: 'Dubai / UAE (Hospitality & Careers)', si: 'ඩුබායි / එක්සත් අරාබි එමීර් (හෝටල් හා වෘත්තීය)', ta: 'துபாய் / ஐக்கிய அரபு எமிரேட்ஸ் (விருந்தோம்பல் & தொழில்)', ja: 'ドバイ・UAE（ホスピタリティ・専門職）' } },
+  { id: 'Maldives', label: { en: 'Maldives (Luxury Resorts & Hospitality)', si: 'මාලදිවයින (සුඛෝපභෝගී හෝටල් ක්ෂේත්‍රය)', ta: 'மாலைத்தீவு (சொகுசு ரிசார்ட்ஸ் & விருந்தோம்பல்)', ja: 'モルディブ（リゾート・ホテル産業）' } },
+  { id: 'Undecided', label: { en: 'Not Sure / Need Guidance', si: 'තීරණය කර නැත / උපදෙස් අවශ්‍යයි', ta: 'முடிவு செய்யவில்லை / ஆலோசனை தேவை', ja: '未定 / カウンセラーと相談希望' } },
+  { id: 'Other', label: { en: 'Other Destination', si: 'වෙනත් රටක්', ta: 'மற்ற நாடு', ja: 'その他の国' } }
+];
+
+const SERVICE_OPTIONS = [
+  { id: "Let's Go Japan Language Courses", label: { en: "Let's Go Japan Language Courses (JLPT / NAT / JFT)", si: 'ජපන් භාෂා පාඨමාලා (JLPT / NAT / JFT)', ta: 'ஜப்பானிய மொழிப் படிப்புகள் (JLPT / NAT / JFT)', ja: '日本語講座（JLPT / NAT / JFT対策）' } },
+  { id: 'Higher Education Abroad', label: { en: 'International Higher Education (Universities & Colleges)', si: 'ජාත්‍යන්තර උසස් අධ්‍යාපනය (විශ්වවිද්‍යාල)', ta: 'சர்வதேச உயர்கல்வி (பல்கலைக்கழகங்கள்)', ja: '海外大学・大学院進学指導' } },
+  { id: 'Your Career Partner Program', label: { en: 'Your Career Partner Program (CV & Interview Prep)', si: 'වෘත්තීය උපදේශන සේවාව (CV සහ සම්මුඛ පරීක්ෂණ)', ta: 'தொழில் வழிகாட்டல் திட்டம் (CV & நேர்காணல்)', ja: '海外キャリア・面接対策プログラム' } },
+  { id: 'Migration & Visa Documentation', label: { en: 'Migration & Visa Compliance Advisory', si: 'වීසා සහ නීතිමය උපදේශන සේවාව', ta: 'விசா மற்றும் ஆவண ஆலோசனை', ja: 'ビザ・公的書類申請ガイダンス' } },
+  { id: 'General Profile Assessment', label: { en: 'General Eligibility Assessment', si: 'සාමාන්‍ය සුදුසුකම් ඇගයීම', ta: 'பொதுத் தகுதி மதிப்பீடு', ja: '総合カウンセリング・適性診断' } }
+];
+
+const CONTACT_METHODS = [
+  { id: 'WhatsApp' as const, label: { en: 'WhatsApp', si: 'WhatsApp', ta: 'WhatsApp', ja: 'WhatsApp' } },
+  { id: 'Phone Call' as const, label: { en: 'Phone Call', si: 'දුරකථන ඇමතුම', ta: 'தொலைபேசி அழைப்பு', ja: '電話連絡' } },
+  { id: 'Email' as const, label: { en: 'Email', si: 'විද්‍යුත් තැපෑල', ta: 'மின்னஞ்சல்', ja: 'メール' } }
+];
+
 export const InquiryForm: React.FC<InquiryFormProps> = ({
   initialDestination = '',
   initialService = '',
   initialInterest = '',
   onOpenSupabaseModal,
-  title = 'Book a Consultation / Send an Inquiry',
-  subtitle = 'Get verified, transparent advice from GlobeLink consultants regarding Japanese language batches, international education, and career pathways.',
+  title,
+  subtitle,
   id = 'inquiry-section'
 }) => {
+  const { language } = useLanguage();
+  const t = TRANSLATIONS[language];
+  const tCommon = t.common;
+
+  const resolvedTitle = title || t.home.inquiryTitle;
+  const resolvedSubtitle = subtitle || t.home.inquirySubtitle;
+
   const [formData, setFormData] = useState<InquiryFormData>({
     fullName: '',
     phone: '',
@@ -43,23 +75,23 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
     const errs: Partial<Record<keyof InquiryFormData, string>> = {};
 
     if (!formData.fullName.trim()) {
-      errs.fullName = 'Full name is required.';
+      errs.fullName = tCommon.errNameRequired;
     }
 
     if (!formData.phone.trim()) {
-      errs.phone = 'Contact phone number is required.';
+      errs.phone = tCommon.errPhoneRequired;
     } else if (!/^[+0-9\s-]{7,18}$/.test(formData.phone.trim())) {
-      errs.phone = 'Please provide a valid phone number (e.g., +94 76 498 6049).';
+      errs.phone = tCommon.errPhoneInvalid;
     }
 
     if (!formData.email.trim()) {
-      errs.email = 'Email address is required.';
+      errs.email = tCommon.errEmailRequired;
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
-      errs.email = 'Please provide a valid email address.';
+      errs.email = tCommon.errEmailInvalid;
     }
 
     if (!formData.consent) {
-      errs.consent = 'You must acknowledge the terms to proceed.';
+      errs.consent = tCommon.errConsentRequired;
     }
 
     setErrors(errs);
@@ -92,7 +124,7 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
       setSubmissionResult({
         success: false,
         isConfigured: false,
-        message: 'An unexpected error occurred. Please contact us directly via WhatsApp.'
+        message: tCommon.error
       });
     } finally {
       setLoading(false);
@@ -107,13 +139,19 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-sky-50 border border-sky-100 rounded-full text-xs font-semibold text-sky-800 mb-3">
             <span className="w-2 h-2 rounded-full bg-rose-500"></span>
-            Direct Advisory Desk
+            {language === 'ja'
+              ? '公式カウンセリング窓口'
+              : language === 'si'
+              ? 'නිල උපදේශන අංශය'
+              : language === 'ta'
+              ? 'அதிகாரப்பூர்வ ஆலோசனை மையம்'
+              : 'Direct Advisory Desk'}
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-            {title}
+            {resolvedTitle}
           </h2>
           <p className="mt-2 text-sm text-slate-600 leading-relaxed">
-            {subtitle}
+            {resolvedSubtitle}
           </p>
         </div>
 
@@ -123,7 +161,13 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
               <span className="font-semibold text-emerald-950">
-                Connected to Supabase Project (ktnyyfaufxxoxdxzolya)
+                {language === 'ja'
+                  ? 'Supabaseクラウドデータベース接続中'
+                  : language === 'si'
+                  ? 'Supabase දත්ත පද්ධතිය සක්‍රීයයි'
+                  : language === 'ta'
+                  ? 'Supabase தரவுத்தளம் இணைக்கப்பட்டுள்ளது'
+                  : 'Connected to Supabase Database'}
               </span>
             </div>
             {onOpenSupabaseModal && (
@@ -132,7 +176,7 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
                 onClick={onOpenSupabaseModal}
                 className="text-[11px] font-semibold text-emerald-800 hover:text-emerald-950 underline shrink-0 inline-flex items-center gap-1"
               >
-                Database Schema &amp; Status
+                {language === 'ja' ? 'スキーマ確認' : language === 'si' ? 'ව්‍යුහය' : language === 'ta' ? 'திட்ட அமைப்பு' : 'Schema status'}
               </button>
             )}
           </div>
@@ -141,10 +185,22 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
             <Database className="w-5 h-5 text-amber-700 shrink-0 mt-0.5" />
             <div className="flex-1">
               <p className="font-semibold text-amber-950">
-                Notice: Cloud Database Integration (Supabase) Pending
+                {language === 'ja'
+                  ? 'クラウドデータベース未連携'
+                  : language === 'si'
+                  ? 'දත්ත පද්ධතිය වින්‍යාස කර නොමැත'
+                  : language === 'ta'
+                  ? 'தரவுத்தளம் உள்ளமைக்கப்படவில்லை'
+                  : 'Direct Supabase Storage Unconfigured'}
               </p>
               <p className="mt-0.5 text-amber-800">
-                Inquiries submitted now are preserved in local storage and can be forwarded to GlobeLink consultants directly via WhatsApp in one tap.
+                {language === 'ja'
+                  ? '送信内容はローカルに保存され、公式WhatsAppへ直接転送可能です。'
+                  : language === 'si'
+                  ? 'විමසීම් ආරක්ෂිතව පවතින අතර WhatsApp මඟින් ඉදිරිපත් කළ හැකිය.'
+                  : language === 'ta'
+                  ? 'விசாரணைகள் சேமிக்கப்பட்டு வாட்ஸ்அப் மூலம் அனுப்பப்படும்.'
+                  : 'Inquiries will be backed up locally and can be dispatched immediately to WhatsApp.'}
               </p>
             </div>
             {onOpenSupabaseModal && (
@@ -153,7 +209,7 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
                 onClick={onOpenSupabaseModal}
                 className="text-xs font-semibold text-sky-800 hover:text-sky-950 underline shrink-0 inline-flex items-center gap-1"
               >
-                Setup Guide <HelpCircle className="w-3.5 h-3.5" />
+                {language === 'ja' ? '設定ガイド' : language === 'si' ? 'සැකසුම්' : language === 'ta' ? 'அமைப்பு' : 'Setup Guide'} <HelpCircle className="w-3.5 h-3.5" />
               </button>
             )}
           </div>
@@ -166,7 +222,7 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
               <CheckCircle2 className="w-6 h-6 text-emerald-600 shrink-0 mt-0.5" />
               <div className="space-y-2 flex-1">
                 <div className="flex items-center justify-between">
-                  <p className="font-bold text-sm text-emerald-950">Inquiry Received Successfully</p>
+                  <p className="font-bold text-sm text-emerald-950">{tCommon.success}</p>
                   {submissionResult.inquiryId && (
                     <span className="font-mono text-[11px] font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded">
                       Ref: {submissionResult.inquiryId}
@@ -185,7 +241,13 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
                       className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-4 py-2 rounded-lg shadow-xs transition-colors"
                     >
                       <MessageCircle className="w-4 h-4" />
-                      Forward Details to WhatsApp Now for Instant Confirmation
+                      {language === 'ja'
+                        ? '今すぐWhatsAppへ転送'
+                        : language === 'si'
+                        ? 'දැන්ම WhatsApp වෙත යොමු කරන්න'
+                        : language === 'ta'
+                        ? 'இப்போதே WhatsApp இல் அனுப்பவும்'
+                        : 'Forward to WhatsApp Now'}
                     </a>
                   </div>
                 )}
@@ -201,7 +263,7 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
               <AlertCircle className="w-6 h-6 text-rose-600 shrink-0 mt-0.5" />
               <div className="space-y-2 flex-1">
                 <p className="font-bold text-sm text-rose-950">
-                  {submissionResult.isConfigured ? 'Submission Issue' : 'Database Not Yet Configured'}
+                  {tCommon.error}
                 </p>
                 <p className="text-xs text-rose-800 leading-relaxed">
                   {submissionResult.message}
@@ -215,7 +277,7 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
                       className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-4 py-2 rounded-lg shadow-xs transition-colors"
                     >
                       <MessageCircle className="w-4 h-4" />
-                      Send Direct via WhatsApp Instead (+94 76 498 6049)
+                      {tCommon.whatsappFallback}
                     </a>
                     {onOpenSupabaseModal && !submissionResult.isConfigured && (
                       <button
@@ -223,7 +285,14 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
                         onClick={onOpenSupabaseModal}
                         className="inline-flex items-center gap-1.5 bg-slate-800 hover:bg-slate-900 text-white text-xs font-semibold px-3 py-2 rounded-lg transition-colors"
                       >
-                        <Database className="w-3.5 h-3.5" /> View Supabase Setup Instructions
+                        <Database className="w-3.5 h-3.5" />{' '}
+                        {language === 'ja'
+                          ? 'Supabase設定ガイド'
+                          : language === 'si'
+                          ? 'Supabase උපදෙස්'
+                          : language === 'ta'
+                          ? 'Supabase வழிகாட்டி'
+                          : 'View Supabase Guide'}
                       </button>
                     )}
                   </div>
@@ -252,12 +321,20 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
             {/* Full Name */}
             <div>
               <label htmlFor="fullName" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                Full Name <span className="text-rose-500">*</span>
+                {tCommon.name} <span className="text-rose-500">*</span>
               </label>
               <input
                 id="fullName"
                 type="text"
-                placeholder="e.g. Kasun Perera"
+                placeholder={
+                  language === 'ja'
+                    ? '例: 山田 太郎 / Kasun Perera'
+                    : language === 'si'
+                    ? 'උදා: කසුන් පෙරේරා'
+                    : language === 'ta'
+                    ? 'உதா: கசுன் பெரேரா'
+                    : 'e.g., Kasun Perera'
+                }
                 value={formData.fullName}
                 onChange={e => setFormData({ ...formData, fullName: e.target.value })}
                 className={`w-full px-3.5 py-2.5 rounded-lg border text-sm text-slate-900 bg-white placeholder:text-slate-400 focus:ring-2 focus:ring-sky-500 transition-colors ${
@@ -270,12 +347,12 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
             {/* Phone */}
             <div>
               <label htmlFor="phone" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                Phone Number (WhatsApp) <span className="text-rose-500">*</span>
+                {tCommon.phone} <span className="text-rose-500">*</span>
               </label>
               <input
                 id="phone"
                 type="tel"
-                placeholder="+94 7X XXX XXXX"
+                placeholder="+94 76 498 6049"
                 value={formData.phone}
                 onChange={e => setFormData({ ...formData, phone: e.target.value })}
                 className={`w-full px-3.5 py-2.5 rounded-lg border text-sm text-slate-900 bg-white placeholder:text-slate-400 focus:ring-2 focus:ring-sky-500 transition-colors ${
@@ -290,7 +367,7 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
             {/* Email */}
             <div>
               <label htmlFor="email" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                Email Address <span className="text-rose-500">*</span>
+                {tCommon.email} <span className="text-rose-500">*</span>
               </label>
               <input
                 id="email"
@@ -308,7 +385,7 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
             {/* Preferred Destination */}
             <div>
               <label htmlFor="destination" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                Preferred Destination
+                {tCommon.destination}
               </label>
               <select
                 id="destination"
@@ -316,13 +393,12 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
                 onChange={e => setFormData({ ...formData, preferredDestination: e.target.value })}
                 className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm text-slate-900 bg-white focus:ring-2 focus:ring-sky-500 transition-colors"
               >
-                <option value="">Select Destination</option>
-                <option value="Japan">Japan (Study / SSW / Work)</option>
-                <option value="Dubai">Dubai (Hospitality & Corporate)</option>
-                <option value="United Arab Emirates">United Arab Emirates (General)</option>
-                <option value="Maldives">Maldives (Resort Hospitality)</option>
-                <option value="Undecided">Undecided / Needs Counseling</option>
-                <option value="Other">Other Verified Destination</option>
+                <option value="">{tCommon.optSelectDestination}</option>
+                {DESTINATION_OPTIONS.map(opt => (
+                  <option key={opt.id} value={opt.id}>
+                    {opt.label[language] || opt.label.en}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
@@ -331,7 +407,7 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
             {/* Service Category */}
             <div>
               <label htmlFor="serviceCategory" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                Service Category
+                {tCommon.serviceCategory}
               </label>
               <select
                 id="serviceCategory"
@@ -339,32 +415,32 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
                 onChange={e => setFormData({ ...formData, serviceCategory: e.target.value })}
                 className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm text-slate-900 bg-white focus:ring-2 focus:ring-sky-500 transition-colors"
               >
-                <option value="">Select Service Area</option>
-                <option value="Let's Go Japan Language Courses">Let&apos;s Go Japan Japanese Language Courses</option>
-                <option value="Higher Education Abroad">Higher Education & Student Visa Guidance</option>
-                <option value="Your Career Partner Program">Your Career Partner Program (Professional Guidance)</option>
-                <option value="Migration & Visa Documentation">Migration & Visa Documentation Support</option>
-                <option value="General Profile Assessment">General Profile Assessment</option>
+                <option value="">{tCommon.optSelectService}</option>
+                {SERVICE_OPTIONS.map(opt => (
+                  <option key={opt.id} value={opt.id}>
+                    {opt.label[language] || opt.label.en}
+                  </option>
+                ))}
               </select>
             </div>
 
             {/* Preferred Contact Method */}
             <div>
               <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                Preferred Contact Method
+                {tCommon.preferredContact}
               </label>
               <div className="flex items-center gap-3 pt-1">
-                {(['WhatsApp', 'Phone Call', 'Email'] as const).map(method => (
-                  <label key={method} className="flex items-center gap-1.5 text-xs text-slate-700 cursor-pointer">
+                {CONTACT_METHODS.map(item => (
+                  <label key={item.id} className="flex items-center gap-1.5 text-xs text-slate-700 cursor-pointer">
                     <input
                       type="radio"
                       name="preferredContactMethod"
-                      value={method}
-                      checked={formData.preferredContactMethod === method}
-                      onChange={() => setFormData({ ...formData, preferredContactMethod: method })}
+                      value={item.id}
+                      checked={formData.preferredContactMethod === item.id}
+                      onChange={() => setFormData({ ...formData, preferredContactMethod: item.id })}
                       className="text-sky-600 focus:ring-sky-500"
                     />
-                    <span>{method}</span>
+                    <span>{item.label[language] || item.label.en}</span>
                   </label>
                 ))}
               </div>
@@ -374,12 +450,20 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
           {/* Education or Career Interest */}
           <div>
             <label htmlFor="interest" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-              Current Education / Professional Background
+              {tCommon.interest}
             </label>
             <input
               id="interest"
               type="text"
-              placeholder="e.g. A/L completed (Commerce stream) or Hotel Front Office 2 years experience"
+              placeholder={
+                language === 'ja'
+                  ? '例: JLPT N5受講希望、特定技能介護、大学院進学、IT就労など'
+                  : language === 'si'
+                  ? 'උදා: JLPT N5, SSW සාත්තු සේවය, විශ්වවිද්‍යාල උපාධි හෝ රැකියා අවස්ථා'
+                  : language === 'ta'
+                  ? 'உதா: JLPT N5, SSW முதியோர் பராமரிப்பு, பல்கலைக்கழக பட்டப்படிப்பு'
+                  : 'e.g., JLPT N5 Course, SSW Caregiving, University Degree, IT Careers'
+              }
               value={formData.educationCareerInterest}
               onChange={e => setFormData({ ...formData, educationCareerInterest: e.target.value })}
               className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm text-slate-900 bg-white placeholder:text-slate-400 focus:ring-2 focus:ring-sky-500 transition-colors"
@@ -389,12 +473,20 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
           {/* Message */}
           <div>
             <label htmlFor="message" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-              Specific Questions or Message
+              {tCommon.message}
             </label>
             <textarea
               id="message"
               rows={3}
-              placeholder="Tell us about your target timeline, preferred batch schedule, or destination requirements..."
+              placeholder={
+                language === 'ja'
+                  ? 'ご質問や現在の日本語学習歴、渡航希望時期などをご自由に入力してください...'
+                  : language === 'si'
+                  ? 'ඔබගේ ප්‍රශ්න හෝ අධ්‍යාපනික අවශ්‍යතා මෙහි සටහන් කරන්න...'
+                  : language === 'ta'
+                  ? 'உங்கள் கேள்விகள் அல்லது தேவைகளை இங்கே குறிப்பிடவும்...'
+                  : 'Tell us about your educational background, timeline, or specific questions...'
+              }
               value={formData.message}
               onChange={e => setFormData({ ...formData, message: e.target.value })}
               className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm text-slate-900 bg-white placeholder:text-slate-400 focus:ring-2 focus:ring-sky-500 transition-colors"
@@ -411,7 +503,7 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
                 className="mt-1 h-4 w-4 rounded border-slate-300 text-sky-600 focus:ring-sky-500"
               />
               <span className="text-xs text-slate-600 leading-normal">
-                I agree to allow GlobeLink Education and Migration Consultants to contact me regarding my inquiry. I understand that GlobeLink provides independent consultancy, language training, and documentation guidance, and does not guarantee visa approvals or employment outcomes.
+                {tCommon.consentText}
               </span>
             </label>
             {errors.consent && <p className="mt-1 text-xs text-rose-600">{errors.consent}</p>}
@@ -427,18 +519,18 @@ export const InquiryForm: React.FC<InquiryFormProps> = ({
               {loading ? (
                 <>
                   <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-                  Processing Inquiry...
+                  {tCommon.submitting}
                 </>
               ) : (
                 <>
                   <Send className="w-4 h-4 text-sky-400" />
-                  Submit Inquiry
+                  {tCommon.submit}
                 </>
               )}
             </button>
 
             <span className="text-xs text-slate-500 text-center sm:text-right">
-              Hotline support: <a href="tel:+94764986049" className="font-semibold text-slate-800 hover:underline">+94 76 498 6049</a>
+              {TRANSLATIONS[language].nav.hotline}: <a href="tel:+94764986049" className="font-semibold text-slate-800 hover:underline">+94 76 498 6049</a>
             </span>
           </div>
         </form>
