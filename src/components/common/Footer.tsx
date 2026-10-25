@@ -104,8 +104,12 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenSupabaseModal 
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-sky-600 flex items-center justify-center text-white shadow-md">
-                <Globe className="w-5 h-5" />
+              <div className="w-10 h-10 rounded-xl bg-slate-900 border border-amber-400/30 flex items-center justify-center text-white shadow-md overflow-hidden p-0.5">
+                <img
+                  src="/assets/aistudio/globelink-logo-48x48_6b9e962d.png"
+                  alt="GlobeLink Education & Migration Consultants"
+                  className="w-full h-full object-contain rounded-lg"
+                />
               </div>
               <div>
                 <span className="text-lg font-bold text-white tracking-tight">
