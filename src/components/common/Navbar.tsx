@@ -181,11 +181,11 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onClick={() => handleNavClick('home')}
                 className="flex items-center gap-3 text-left group focus:outline-hidden"
               >
-                <div className="w-11 h-11 rounded-xl bg-slate-950 flex items-center justify-center shadow-md border border-amber-400/30 group-hover:scale-105 transition-transform overflow-hidden p-0.5">
+                <div className="w-11 h-11 rounded-xl bg-slate-950 flex items-center justify-center shadow-md border border-amber-400/40 group-hover:scale-105 transition-transform overflow-hidden p-0.5">
                   <img
-                    src="/assets/aistudio/globelink-logo-48x48_6b9e962d.png"
+                    src="/assets/aistudio/globelink-logo.svg"
                     alt="GlobeLink Education & Migration Consultants"
-                    className="w-full h-full object-contain rounded-lg"
+                    className="w-full h-full object-contain rounded-lg filter drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)]"
                   />
                 </div>
                 <div>
